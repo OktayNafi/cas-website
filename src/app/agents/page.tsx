@@ -7,6 +7,7 @@ import {
   Workflow,
   Code,
   BrainCircuit,
+  ClipboardList,
   ArrowRight,
   CheckCircle2,
 } from "lucide-react";
@@ -96,6 +97,21 @@ const agents = [
       "Post-launch support and iteration",
     ],
     useCases: ["Businesses with unique workflows", "Startups building AI-native products", "Companies needing internal AI tools"],
+  },
+  {
+    id: "project-manager",
+    icon: ClipboardList,
+    title: "AI Project Manager",
+    price: "Included with retainers",
+    summary:
+      "Strategic planning, task delegation, progress tracking, and decision-making. Your AI PM coordinates everything — so you focus on the vision. Available as part of any retainer engagement.",
+    outcomes: [
+      "Automated project planning and task breakdown",
+      "Real-time progress tracking and status reporting",
+      "Intelligent task delegation and resource allocation",
+      "Decision-support with data-driven recommendations",
+    ],
+    useCases: ["Teams managing multiple AI initiatives", "Companies on retainer engagements", "Leadership needing project visibility"],
   },
   {
     id: "consulting",

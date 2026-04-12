@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useCallback } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   Phone,
@@ -10,6 +10,7 @@ import {
   Workflow,
   Code,
   BrainCircuit,
+  ClipboardList,
   ArrowUpRight,
 } from "lucide-react";
 
@@ -22,8 +23,7 @@ const agents = [
       "Answers calls 24/7, books appointments, handles enquiries. Sounds natural. Never takes a day off. Already live and deployed.",
     href: "/recepta",
     live: true,
-    price: "From £100/mo",
-    size: "large",
+    price: "Custom pricing",
   },
   {
     icon: Users,
@@ -32,8 +32,7 @@ const agents = [
     description:
       "Automated outreach that finds, qualifies, and engages your ideal customers across channels.",
     href: "/agents#lead-generation",
-    price: "From £200/mo",
-    size: "medium",
+    price: "Custom pricing",
   },
   {
     icon: Headphones,
@@ -42,8 +41,7 @@ const agents = [
     description:
       "Resolves tickets, answers FAQs, escalates intelligently. Response times drop from hours to seconds.",
     href: "/agents#customer-support",
-    price: "From £100/mo",
-    size: "medium",
+    price: "Custom pricing",
   },
   {
     icon: Workflow,
@@ -52,8 +50,7 @@ const agents = [
     description:
       "Connects your tools, eliminates manual tasks. If it's repetitive, we automate it.",
     href: "/agents#workflow",
-    price: "From £200/mo",
-    size: "medium",
+    price: "Custom pricing",
   },
   {
     icon: Code,
@@ -62,8 +59,16 @@ const agents = [
     description:
       "Full-stack AI applications built to your exact specifications. From concept to production. Currently building for Mediwell Clinic.",
     href: "/agents#custom-dev",
-    price: "From £5,000",
-    size: "large",
+    price: "Custom pricing",
+  },
+  {
+    icon: ClipboardList,
+    title: "AI Project Manager",
+    subtitle: "AI Coordination Agent",
+    description:
+      "Strategic planning, task delegation, progress tracking, and decision-making. Your AI PM coordinates everything — so you focus on the vision.",
+    href: "/agents#project-manager",
+    price: "Included with retainers",
   },
   {
     icon: BrainCircuit,
@@ -72,8 +77,7 @@ const agents = [
     description:
       "Expert guidance on where AI fits in your business and how to get there.",
     href: "/agents#consulting",
-    price: "From £500",
-    size: "small",
+    price: "Custom pricing",
   },
 ];
 
@@ -84,20 +88,44 @@ function Card({
   agent: (typeof agents)[0];
   index: number;
 }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = cardRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -4;
+    const rotateY = ((x - centerX) / centerX) * 4;
+    el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01,1.01,1.01)`;
+    el.style.setProperty("--mouse-x", `${(x / rect.width) * 100}%`);
+    el.style.setProperty("--mouse-y", `${(y / rect.height) * 100}%`);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)";
+  }, []);
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <Link href={agent.href} className="group block h-full">
-        <div className="relative h-full rounded-2xl glass glass-hover p-7 sm:p-8 overflow-hidden">
-          {/* Glow on hover */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-            <div className="absolute -top-24 -right-24 w-48 h-48 bg-accent/10 rounded-full blur-3xl" />
-          </div>
-
+        <div
+          ref={cardRef}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          className="relative h-full rounded-2xl agent-card p-7 sm:p-8 overflow-hidden"
+          style={{ transition: "transform 0.2s ease-out" }}
+        >
           <div className="relative z-10">
             <div className="flex items-start justify-between mb-5">
               <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
@@ -112,7 +140,7 @@ function Card({
                 )}
                 <ArrowUpRight
                   size={16}
-                  className="text-white/20 group-hover:text-white/50 transition-colors duration-300"
+                  className="text-white/15 group-hover:text-white/40 transition-colors duration-300"
                 />
               </div>
             </div>
@@ -123,10 +151,10 @@ function Card({
             <p className="text-xs text-accent/70 font-medium mb-3">
               {agent.subtitle}
             </p>
-            <p className="text-sm text-white/40 leading-relaxed mb-4">
+            <p className="text-sm text-white/35 leading-relaxed mb-4">
               {agent.description}
             </p>
-            <p className="text-xs font-medium text-highlight/80">
+            <p className="text-xs font-medium text-highlight/70">
               {agent.price}
             </p>
           </div>
@@ -138,9 +166,9 @@ function Card({
 
 export default function BentoGrid() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {/* Row 1: Large (2 cols) + Medium + Medium */}
-      <div className="sm:col-span-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-auto">
+      {/* Row 1: Recepta (2 cols, taller) + Lead Gen + Customer Support */}
+      <div className="sm:col-span-2 sm:row-span-2">
         <Card agent={agents[0]} index={0} />
       </div>
       <div>
@@ -150,15 +178,20 @@ export default function BentoGrid() {
         <Card agent={agents[2]} index={2} />
       </div>
 
-      {/* Row 2: Medium + Large (2 cols) + Small */}
+      {/* Row 1 continued: Workflow + Project Manager fill under Lead/Support */}
       <div>
         <Card agent={agents[3]} index={3} />
       </div>
-      <div className="sm:col-span-2">
-        <Card agent={agents[4]} index={4} />
-      </div>
       <div>
-        <Card agent={agents[5]} index={5} />
+        <Card agent={agents[5]} index={4} />
+      </div>
+
+      {/* Row 2: Custom AI Dev (2 cols) + Consulting */}
+      <div className="sm:col-span-2">
+        <Card agent={agents[4]} index={5} />
+      </div>
+      <div className="sm:col-span-2 lg:col-span-2">
+        <Card agent={agents[6]} index={6} />
       </div>
     </div>
   );

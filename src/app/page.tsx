@@ -14,7 +14,7 @@ export default function Home() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-32 sm:py-40">
           <Reveal>
-            <h1 className="text-[clamp(2.5rem,6vw,6rem)] font-bold tracking-tight leading-[1.05] max-w-4xl">
+            <h1 className="text-[clamp(3rem,7vw,6rem)] font-extrabold tracking-tight leading-[1.02] max-w-5xl">
               <span className="gradient-text">
                 We build the AI your business actually needs.
               </span>
@@ -22,7 +22,7 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <p className="mt-6 text-base sm:text-lg text-white/40 max-w-2xl leading-relaxed">
+            <p className="mt-8 text-base sm:text-lg text-white/40 max-w-2xl leading-relaxed">
               Custom AI agents, integrated into your workflow, delivered by
               Company AI Solutions. From AI receptionists to bespoke
               automations — if a process can be improved with AI, we build it.
@@ -30,10 +30,10 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.3}>
-            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+            <div className="mt-12 flex flex-col sm:flex-row gap-4">
               <Link
                 href="/contact"
-                className="btn-glow inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-navy-deep bg-highlight rounded-full hover:bg-highlight-dark transition-colors duration-200"
+                className="btn-glow btn-pulse inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-navy-deep bg-highlight rounded-full hover:bg-highlight-dark transition-colors duration-200"
               >
                 Request a Custom Quote
                 <ArrowRight size={16} className="ml-2" />
@@ -48,7 +48,7 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.45}>
-            <p className="mt-12 text-[11px] text-white/20 flex items-center gap-1.5">
+            <p className="mt-14 text-[11px] text-white/20 flex items-center gap-1.5">
               <Lock size={10} />
               Powered by Company AI Solutions Ltd — Registered in England & Wales
             </p>
@@ -57,7 +57,7 @@ export default function Home() {
       </section>
 
       {/* ─── WHAT WE DO ─── */}
-      <section className="py-32 sm:py-40">
+      <section className="py-36 sm:py-44">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-4xl space-y-2">
             {[
@@ -76,15 +76,15 @@ export default function Home() {
       </section>
 
       {/* ─── BENTO GRID ─── */}
-      <section className="pb-32 sm:pb-40">
+      <section className="pb-36 sm:pb-44">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
-            <div className="mb-14">
+            <div className="mb-16">
               <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                 AI agents we build
               </h2>
               <p className="mt-3 text-sm text-white/30">
-                Six product lines. Infinite configurations. Every agent is
+                Seven product lines. Infinite configurations. Every agent is
                 custom-built for your business.
               </p>
             </div>
@@ -94,10 +94,10 @@ export default function Home() {
       </section>
 
       {/* ─── HOW WE WORK ─── */}
-      <section className="py-32 sm:py-40 border-t border-white/5">
+      <section className="py-36 sm:py-44 border-t border-white/5">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
-            <div className="text-center mb-20">
+            <div className="text-center mb-24">
               <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                 How we work
               </h2>
@@ -111,7 +111,7 @@ export default function Home() {
       </section>
 
       {/* ─── CASE STUDY TEASER ─── */}
-      <section className="py-32 sm:py-40 border-t border-white/5">
+      <section className="py-36 sm:py-44 border-t border-white/5">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="relative rounded-3xl glass p-10 sm:p-16 overflow-hidden">
@@ -120,7 +120,7 @@ export default function Home() {
 
               <div className="relative max-w-2xl">
                 <span className="text-[10px] font-semibold uppercase tracking-widest text-accent/70">
-                  Case Study
+                  Active Project
                 </span>
                 <h2 className="mt-3 text-2xl sm:text-3xl font-bold text-white tracking-tight">
                   Mediwell Clinic
@@ -129,15 +129,16 @@ export default function Home() {
                   Private medical clinic — London, UK
                 </p>
                 <p className="mt-6 text-white/40 leading-relaxed">
-                  We deployed a custom AI receptionist and patient management
-                  agent for Mediwell Clinic, reducing missed calls by 95% and
-                  saving 30+ hours of admin per week. Full case study available.
+                  Building a custom patient booking and video consultation app
+                  for a private medical clinic in London. AI-powered scheduling,
+                  payments, and doctor-patient video calls — all in one iOS app.
+                  Case study coming on launch.
                 </p>
                 <Link
                   href="/case-studies"
                   className="inline-flex items-center mt-8 text-sm font-medium text-accent hover:text-accent-light transition-colors duration-200"
                 >
-                  Read the full story
+                  Learn more
                   <ArrowRight size={14} className="ml-1.5" />
                 </Link>
               </div>
@@ -147,7 +148,7 @@ export default function Home() {
       </section>
 
       {/* ─── FINAL CTA ─── */}
-      <section className="py-32 sm:py-40 border-t border-white/5">
+      <section className="py-36 sm:py-44 border-t border-white/5">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="relative rounded-3xl glass p-10 sm:p-16 text-center overflow-hidden">
@@ -163,7 +164,7 @@ export default function Home() {
                 </p>
                 <Link
                   href="/contact"
-                  className="btn-glow inline-flex items-center mt-10 px-8 py-3.5 text-sm font-semibold text-navy-deep bg-highlight rounded-full hover:bg-highlight-dark transition-colors duration-200"
+                  className="btn-glow btn-pulse inline-flex items-center mt-10 px-8 py-3.5 text-sm font-semibold text-navy-deep bg-highlight rounded-full hover:bg-highlight-dark transition-colors duration-200"
                 >
                   Request a Custom Quote
                   <ArrowRight size={16} className="ml-2" />

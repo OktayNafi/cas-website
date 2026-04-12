@@ -13,7 +13,7 @@ const steps = [
 
 export default function ProcessSteps() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <div ref={ref} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0">
@@ -21,29 +21,34 @@ export default function ProcessSteps() {
         <motion.div
           key={step.label}
           initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: i * 0.15, ease: "easeOut" }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: i * 0.25, ease: "easeOut" }}
           className="relative"
         >
-          {/* Connecting line */}
+          {/* Connecting line — animates after card appears */}
           {i < steps.length - 1 && (
             <motion.div
               initial={{ scaleX: 0 }}
-              animate={inView ? { scaleX: 1 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.15 + 0.3 }}
-              className="hidden lg:block absolute top-7 left-[calc(50%+24px)] right-0 h-px bg-gradient-to-r from-white/10 to-white/5 origin-left"
+              animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 0.8, delay: i * 0.25 + 0.4, ease: "easeOut" }}
+              className="hidden lg:block absolute top-7 left-[calc(50%+28px)] right-0 h-px bg-gradient-to-r from-accent/20 to-accent/5 origin-left"
             />
           )}
 
           <div className="relative z-10 flex flex-col items-center text-center px-4">
-            <div className="w-14 h-14 rounded-2xl glass flex items-center justify-center mb-4">
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={inView ? { scale: 1 } : { scale: 0.8 }}
+              transition={{ duration: 0.4, delay: i * 0.25 + 0.1, ease: "easeOut" }}
+              className="w-14 h-14 rounded-2xl agent-card flex items-center justify-center mb-4"
+            >
               <step.icon size={22} className="text-accent" />
-            </div>
+            </motion.div>
             <span className="text-[10px] font-semibold uppercase tracking-widest text-highlight mb-2">
               0{i + 1}
             </span>
             <h3 className="text-base font-semibold text-white mb-2">{step.label}</h3>
-            <p className="text-sm text-white/40 leading-relaxed max-w-[200px]">{step.desc}</p>
+            <p className="text-sm text-white/35 leading-relaxed max-w-[200px]">{step.desc}</p>
           </div>
         </motion.div>
       ))}
