@@ -210,7 +210,7 @@ export default function Home() {
             description:
               "Custom AI agents for mid-size businesses. We build, deploy, and maintain AI systems.",
             url: "https://companyaisolutions.co.uk",
-            email: "hello@companyaisolutions.co.uk",
+            email: "info@companyaisolutions.co.uk",
             address: { "@type": "PostalAddress", addressCountry: "GB" },
             sameAs: ["https://www.linkedin.com/company/companyaisolutions"],
           }),

@@ -80,11 +80,11 @@ export default function Footer() {
             </h3>
             <div className="space-y-3">
               <a
-                href="mailto:hello@companyaisolutions.co.uk"
+                href="mailto:info@companyaisolutions.co.uk"
                 className="group flex items-center gap-2 text-sm text-white/40 hover:text-highlight transition-colors duration-200"
               >
                 <span>&rarr;</span>
-                hello@companyaisolutions.co.uk
+                info@companyaisolutions.co.uk
               </a>
               <a
                 href="https://www.linkedin.com/company/companyaisolutions"

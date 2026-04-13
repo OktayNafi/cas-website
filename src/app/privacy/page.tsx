@@ -23,7 +23,7 @@ export default function PrivacyPage() {
             Company AI Solutions Ltd (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal data in accordance with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018.
           </S>
           <S title="2. Data Controller">
-            The data controller is Company AI Solutions Ltd, registered in England & Wales. Contact: hello@companyaisolutions.co.uk.
+            The data controller is Company AI Solutions Ltd, registered in England & Wales. Contact: info@companyaisolutions.co.uk.
           </S>
           <S title="3. Information We Collect">
             We may collect: name, email, phone number, company name (via our contact form); usage data and analytics; communication records; and any information you voluntarily provide.
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
             We retain data only as long as necessary or as required by law. Contact form submissions are retained for up to 2 years.
           </S>
           <S title="8. Your Rights">
-            Under UK GDPR you may: access, rectify, erase, restrict, port, or object to processing of your data. Contact hello@companyaisolutions.co.uk to exercise these rights.
+            Under UK GDPR you may: access, rectify, erase, restrict, port, or object to processing of your data. Contact info@companyaisolutions.co.uk to exercise these rights.
           </S>
           <S title="9. Cookies">
             We use essential cookies for functionality and may use analytics cookies. Manage preferences via your browser settings.
@@ -53,7 +53,7 @@ export default function PrivacyPage() {
             We may update this policy. Changes will be posted here with an updated date.
           </S>
           <S title="12. Contact & Complaints">
-            Contact hello@companyaisolutions.co.uk. You may also complain to the ICO at ico.org.uk.
+            Contact info@companyaisolutions.co.uk. You may also complain to the ICO at ico.org.uk.
           </S>
         </div>
       </div>

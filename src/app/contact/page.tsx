@@ -102,10 +102,10 @@ export default function ContactPage() {
               <div>
                 <p className="text-xs text-white/25">Email us directly</p>
                 <a
-                  href="mailto:hello@companyaisolutions.co.uk"
+                  href="mailto:info@companyaisolutions.co.uk"
                   className="text-sm text-white/60 hover:text-highlight transition-colors"
                 >
-                  hello@companyaisolutions.co.uk
+                  info@companyaisolutions.co.uk
                 </a>
               </div>
             </div>

@@ -53,7 +53,7 @@ export default function TermsPage() {
             We may update these Terms. Continued use constitutes acceptance.
           </S>
           <S title="12. Contact">
-            Questions? Contact hello@companyaisolutions.co.uk.
+            Questions? Contact info@companyaisolutions.co.uk.
           </S>
         </div>
       </div>

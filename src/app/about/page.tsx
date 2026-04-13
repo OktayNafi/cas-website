@@ -137,8 +137,8 @@ export default function AboutPage() {
                   <div>
                     <p className="text-white/25 text-xs mb-0.5">Email</p>
                     <p className="text-white/60">
-                      <a href="mailto:hello@companyaisolutions.co.uk" className="hover:text-highlight transition-colors">
-                        hello@companyaisolutions.co.uk
+                      <a href="mailto:info@companyaisolutions.co.uk" className="hover:text-highlight transition-colors">
+                        info@companyaisolutions.co.uk
                       </a>
                     </p>
                   </div>
