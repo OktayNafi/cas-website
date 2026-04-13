@@ -147,6 +147,7 @@ body::after {
 
 .agent-card:hover {
   background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px rgba(15, 240, 160, 0.25), 0 0 20px rgba(15, 240, 160, 0.08);
 }
 
 .agent-card:hover::before {
@@ -170,6 +171,12 @@ body::after {
 
 /* ── Primary button ── */
 .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  font-size: 0.875rem;
+  border-radius: 9999px;
   position: relative;
   background: #0FF0A0;
   color: #05060A;
@@ -196,6 +203,12 @@ body::after {
 
 /* ── Secondary button ── */
 .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  font-size: 0.875rem;
+  border-radius: 9999px;
   position: relative;
   border: 1px solid rgba(15, 240, 160, 0.4);
   color: #0FF0A0;
@@ -226,8 +239,9 @@ body::after {
 /* ── Marquee ── */
 .marquee-track {
   display: flex;
-  animation: marquee 30s linear infinite;
+  animation: marquee 25s linear infinite;
   width: max-content;
+  will-change: transform;
 }
 
 @keyframes marquee {

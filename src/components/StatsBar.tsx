@@ -12,20 +12,20 @@ const stats = [
 
 function Counter({ target, suffix, inView }: { target: number; suffix: string; inView: boolean }) {
   const [count, setCount] = useState(0);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    if (!inView) return;
-    let start = 0;
+    if (!inView || hasAnimated.current) return;
+    hasAnimated.current = true;
+
     const duration = 1500;
     const startTime = performance.now();
 
     const tick = (now: number) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(eased * target);
-      setCount(current);
+      setCount(Math.round(eased * target));
       if (progress < 1) requestAnimationFrame(tick);
     };
 
@@ -41,8 +41,8 @@ function Counter({ target, suffix, inView }: { target: number; suffix: string; i
 }
 
 export default function StatsBar() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <div ref={ref} className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
@@ -55,9 +55,10 @@ export default function StatsBar() {
           className="text-center"
         >
           <div
-            className="text-6xl sm:text-7xl lg:text-[80px] font-black tracking-tight leading-none"
+            className="text-[80px] sm:text-[80px] lg:text-[80px] leading-none"
             style={{
               color: "#0FF0A0",
+              fontWeight: 900,
               textShadow: "0 0 30px rgba(15, 240, 160, 0.3)",
             }}
           >

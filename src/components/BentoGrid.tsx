@@ -184,33 +184,44 @@ function Card({
 }
 
 export default function BentoGrid() {
+  // Reordered: Recepta, PM, Custom Dev, Lead Gen, Support, Workflow, Consulting
+  const recepta = agents[0];
+  const pm = agents[5];
+  const customDev = agents[4];
+  const leadGen = agents[1];
+  const support = agents[2];
+  const workflow = agents[3];
+  const consulting = agents[6];
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-auto">
-      {/* Row 1: Recepta (2 cols, taller) + Lead Gen + Customer Support */}
-      <div className="sm:col-span-2 sm:row-span-2">
-        <Card agent={agents[0]} index={0} />
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Row 1: Recepta (2 cols, tall) + PM (1 col, tall) */}
+      <div className="sm:col-span-2 lg:row-span-2">
+        <Card agent={recepta} index={0} />
       </div>
-      <div>
-        <Card agent={agents[1]} index={1} />
-      </div>
-      <div>
-        <Card agent={agents[2]} index={2} />
+      <div className="lg:row-span-2">
+        <Card agent={pm} index={1} />
       </div>
 
-      {/* Row 1 continued: Workflow + Project Manager fill under Lead/Support */}
-      <div>
-        <Card agent={agents[3]} index={3} />
-      </div>
-      <div>
-        <Card agent={agents[5]} index={4} />
+      {/* Row 1 right: Custom Dev (wide) */}
+      <div className="lg:row-span-2">
+        <Card agent={customDev} index={2} />
       </div>
 
-      {/* Row 2: Custom AI Dev (2 cols) + Consulting */}
-      <div className="sm:col-span-2">
-        <Card agent={agents[4]} index={5} />
+      {/* Row 2: Lead Gen + Support + Workflow */}
+      <div>
+        <Card agent={leadGen} index={3} />
       </div>
-      <div className="sm:col-span-2 lg:col-span-2">
-        <Card agent={agents[6]} index={6} />
+      <div>
+        <Card agent={support} index={4} />
+      </div>
+      <div>
+        <Card agent={workflow} index={5} />
+      </div>
+
+      {/* Row 3: Consulting spans full bottom */}
+      <div className="sm:col-span-2 lg:col-span-4">
+        <Card agent={consulting} index={6} />
       </div>
     </div>
   );

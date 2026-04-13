@@ -101,6 +101,9 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="mb-16">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-highlight/70 mb-3">
+                — Our Services
+              </p>
               <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                 AI agents we build
               </h2>
@@ -121,6 +124,9 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="text-center mb-24">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-highlight/70 mb-3">
+                — Our Process
+              </p>
               <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                 How we work
               </h2>
@@ -182,6 +188,9 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-br from-highlight/3 via-transparent to-accent/3 pointer-events-none" />
 
               <div className="relative">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-highlight/70 mb-3">
+                  — Get Started
+                </p>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight max-w-2xl mx-auto">
                   Ready to build something?
                 </h2>
