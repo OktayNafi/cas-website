@@ -3,6 +3,8 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LoadingScreen from "@/components/LoadingScreen";
+import CustomCursor from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
   title: {
@@ -47,7 +49,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className={`${GeistSans.className} antialiased`}>
+        <LoadingScreen />
+        <CustomCursor />
         <div className="mesh-gradient" aria-hidden="true" />
         <Navbar />
         <main className="relative z-10 min-h-screen pt-16">{children}</main>

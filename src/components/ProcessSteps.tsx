@@ -36,17 +36,19 @@ export default function ProcessSteps() {
           )}
 
           <div className="relative z-10 flex flex-col items-center text-center px-4">
-            <motion.div
-              initial={{ scale: 0.8 }}
-              animate={inView ? { scale: 1 } : { scale: 0.8 }}
-              transition={{ duration: 0.4, delay: i * 0.25 + 0.1, ease: "easeOut" }}
-              className="w-14 h-14 rounded-2xl agent-card flex items-center justify-center mb-4"
+            <motion.span
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={inView ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.25 + 0.1, ease: "easeOut" }}
+              className="text-[100px] sm:text-[120px] font-black leading-none mb-2"
+              style={{
+                WebkitTextStroke: "1.5px #0FF0A0",
+                WebkitTextFillColor: "transparent",
+                opacity: 0.25,
+              }}
             >
-              <step.icon size={22} className="text-accent" />
-            </motion.div>
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-highlight mb-2">
               0{i + 1}
-            </span>
+            </motion.span>
             <h3 className="text-base font-semibold text-white mb-2">{step.label}</h3>
             <p className="text-sm text-white/35 leading-relaxed max-w-[200px]">{step.desc}</p>
           </div>

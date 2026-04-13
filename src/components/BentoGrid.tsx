@@ -13,6 +13,15 @@ import {
   ClipboardList,
   ArrowUpRight,
 } from "lucide-react";
+import {
+  SoundWave,
+  ArrowChart,
+  TypingBubble,
+  NodeDiagram,
+  KanbanBoard,
+  WireframeCube,
+  LightbulbRays,
+} from "./CardAnimations";
 
 const agents = [
   {
@@ -24,6 +33,7 @@ const agents = [
     href: "/recepta",
     live: true,
     price: "Custom pricing",
+    Animation: SoundWave,
   },
   {
     icon: Users,
@@ -33,6 +43,7 @@ const agents = [
       "Automated outreach that finds, qualifies, and engages your ideal customers across channels.",
     href: "/agents#lead-generation",
     price: "Custom pricing",
+    Animation: ArrowChart,
   },
   {
     icon: Headphones,
@@ -42,6 +53,7 @@ const agents = [
       "Resolves tickets, answers FAQs, escalates intelligently. Response times drop from hours to seconds.",
     href: "/agents#customer-support",
     price: "Custom pricing",
+    Animation: TypingBubble,
   },
   {
     icon: Workflow,
@@ -51,6 +63,7 @@ const agents = [
       "Connects your tools, eliminates manual tasks. If it's repetitive, we automate it.",
     href: "/agents#workflow",
     price: "Custom pricing",
+    Animation: NodeDiagram,
   },
   {
     icon: Code,
@@ -60,6 +73,7 @@ const agents = [
       "Full-stack AI applications built to your exact specifications. From concept to production. Currently building for Mediwell Clinic.",
     href: "/agents#custom-dev",
     price: "Custom pricing",
+    Animation: WireframeCube,
   },
   {
     icon: ClipboardList,
@@ -69,6 +83,7 @@ const agents = [
       "Strategic planning, task delegation, progress tracking, and decision-making. Your AI PM coordinates everything — so you focus on the vision.",
     href: "/agents#project-manager",
     price: "Included with retainers",
+    Animation: KanbanBoard,
   },
   {
     icon: BrainCircuit,
@@ -78,6 +93,7 @@ const agents = [
       "Expert guidance on where AI fits in your business and how to get there.",
     href: "/agents#consulting",
     price: "Custom pricing",
+    Animation: LightbulbRays,
   },
 ];
 
@@ -154,9 +170,12 @@ function Card({
             <p className="text-sm text-white/35 leading-relaxed mb-4">
               {agent.description}
             </p>
-            <p className="text-xs font-medium text-highlight/70">
-              {agent.price}
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="text-xs font-medium text-highlight/70">
+                {agent.price}
+              </p>
+              {agent.Animation && <agent.Animation />}
+            </div>
           </div>
         </div>
       </Link>

@@ -175,7 +175,7 @@ export default function AboutPage() {
             </p>
             <Link
               href="/contact"
-              className="btn-glow inline-flex items-center mt-10 px-8 py-3.5 text-sm font-semibold text-navy-deep bg-highlight rounded-full hover:bg-highlight-dark transition-colors"
+              className="btn-primary mt-10"
             >
               Book a Free Consultation
               <ArrowRight size={16} className="ml-2" />

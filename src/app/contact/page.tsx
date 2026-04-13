@@ -257,7 +257,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="btn-glow w-full inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-navy-deep bg-highlight rounded-full hover:bg-highlight-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {status === "loading" ? "Sending..." : "Request a Quote"}
                   <ArrowRight size={16} className="ml-2" />

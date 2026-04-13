@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -17,6 +18,7 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -45,21 +47,33 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center gap-1">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-3 py-1.5 text-[13px] text-white/50 hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/5"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {links.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative px-3 py-1.5 text-[13px] transition-colors duration-200 rounded-lg hover:bg-white/5 ${
+                    isActive ? "text-highlight" : "text-white/50 hover:text-white"
+                  }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-underline"
+                      className="absolute bottom-0 left-3 right-3 h-px bg-highlight"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="hidden md:block">
             <Link
               href="/contact"
-              className="btn-glow inline-flex items-center px-5 py-2 text-[13px] font-medium text-navy-deep bg-highlight rounded-full hover:bg-highlight-dark transition-colors duration-200"
+              className="btn-primary !px-5 !py-2 !text-[13px]"
             >
               Request a Quote
             </Link>
@@ -105,7 +119,7 @@ export default function Navbar() {
                 <Link
                   href="/contact"
                   onClick={() => setOpen(false)}
-                  className="btn-glow inline-flex items-center px-5 py-2.5 text-[13px] font-medium text-navy-deep bg-highlight rounded-full"
+                  className="btn-primary !px-5 !py-2.5 !text-[13px]"
                 >
                   Request a Quote
                 </Link>

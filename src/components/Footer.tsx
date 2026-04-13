@@ -1,82 +1,109 @@
-import Link from "next/link";
+"use client";
 
-const cols = {
-  "AI Agents": [
-    { href: "/recepta", label: "Recepta" },
-    { href: "/agents#lead-generation", label: "Lead Generation" },
-    { href: "/agents#customer-support", label: "Customer Support" },
-    { href: "/agents#workflow", label: "Workflow Automation" },
-    { href: "/agents#custom-dev", label: "Custom Development" },
-    { href: "/agents#consulting", label: "Consulting" },
-  ],
-  Company: [
-    { href: "/about", label: "About" },
-    { href: "/case-studies", label: "Case Studies" },
-    { href: "/contact", label: "Contact" },
-  ],
-  Legal: [
-    { href: "/privacy", label: "Privacy Policy" },
-    { href: "/terms", label: "Terms of Service" },
-  ],
-};
+import Link from "next/link";
+import { motion } from "framer-motion";
+
+const footerLinks = [
+  { href: "/agents", label: "Agents" },
+  { href: "/recepta", label: "Recepta" },
+  { href: "/case-studies", label: "Case Studies" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" },
+];
+
+function ArrowLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="group flex items-center gap-2 text-sm text-white/40 hover:text-highlight transition-colors duration-200">
+      <motion.span
+        className="inline-block"
+        whileHover={{ x: 4 }}
+        transition={{ type: "spring", stiffness: 400, damping: 20 }}
+      >
+        &rarr;
+      </motion.span>
+      {label}
+    </Link>
+  );
+}
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 border-t border-white/5">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
-          <div className="col-span-2 md:col-span-1">
-            <span className="text-xl font-bold text-white tracking-tight">
-              CAS<span className="text-highlight">.</span>
-            </span>
-            <p className="mt-4 text-sm text-white/30 max-w-xs leading-relaxed">
-              We build the AI your business actually needs. Custom AI agents,
-              deployed into your workflow.
-            </p>
-          </div>
-
-          {Object.entries(cols).map(([title, links]) => (
-            <div key={title}>
-              <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-4">
-                {title}
-              </h3>
-              <ul className="space-y-2.5">
-                {links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-white/30 hover:text-white/60 transition-colors duration-200"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+    <footer className="relative z-10 border-t border-highlight/10">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 sm:py-28">
+        {/* Huge outlined CAS logo */}
+        <div className="mb-16">
+          <span
+            className="text-[20vw] sm:text-[16vw] lg:text-[12vw] font-black leading-none tracking-tighter select-none"
+            style={{
+              WebkitTextStroke: "2px rgba(15, 240, 160, 0.15)",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            CAS.
+          </span>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[11px] text-white/20">
-            &copy; {new Date().getFullYear()} Company AI Solutions Ltd.
-            Registered in England & Wales. Registered with the ICO.
-          </p>
-          <div className="flex items-center gap-6">
-            <a
-              href="https://www.linkedin.com/company/companyaisolutions"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/20 hover:text-white/40 transition-colors text-[11px]"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="mailto:hello@companyaisolutions.co.uk"
-              className="text-white/20 hover:text-white/40 transition-colors text-[11px]"
-            >
-              hello@companyaisolutions.co.uk
-            </a>
+        {/* Tagline */}
+        <p className="text-xl sm:text-2xl lg:text-3xl font-black tracking-[-0.03em] text-white/60 max-w-2xl mb-16">
+          WE IMPLEMENT AI INTO YOUR BUSINESS.
+        </p>
+
+        {/* Links + Info */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 mb-16">
+          <div className="col-span-2 sm:col-span-1">
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/20 mb-4">
+              Navigate
+            </h3>
+            <div className="space-y-3">
+              {footerLinks.slice(0, 5).map((link) => (
+                <ArrowLink key={link.href} href={link.href} label={link.label} />
+              ))}
+            </div>
           </div>
+
+          <div>
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/20 mb-4">
+              Legal
+            </h3>
+            <div className="space-y-3">
+              {footerLinks.slice(5).map((link) => (
+                <ArrowLink key={link.href} href={link.href} label={link.label} />
+              ))}
+            </div>
+          </div>
+
+          <div className="col-span-2 sm:col-span-1">
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/20 mb-4">
+              Connect
+            </h3>
+            <div className="space-y-3">
+              <a
+                href="mailto:hello@companyaisolutions.co.uk"
+                className="group flex items-center gap-2 text-sm text-white/40 hover:text-highlight transition-colors duration-200"
+              >
+                <span>&rarr;</span>
+                hello@companyaisolutions.co.uk
+              </a>
+              <a
+                href="https://www.linkedin.com/company/companyaisolutions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 text-sm text-white/40 hover:text-highlight transition-colors duration-200"
+              >
+                <span>&rarr;</span>
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="pt-8 border-t border-white/5">
+          <p className="text-[11px] text-white/15">
+            &copy; {new Date().getFullYear()} Company AI Solutions Ltd. Registered in England &amp; Wales. Registered with the ICO.
+          </p>
         </div>
       </div>
     </footer>

@@ -4,6 +4,9 @@ import Reveal from "@/components/Reveal";
 import BentoGrid from "@/components/BentoGrid";
 import ProcessSteps from "@/components/ProcessSteps";
 import HeroSceneLoader from "@/components/HeroSceneLoader";
+import HeroParticles from "@/components/HeroParticles";
+import Marquee from "@/components/Marquee";
+import StatsBar from "@/components/StatsBar";
 
 export default function Home() {
   return (
@@ -11,13 +14,23 @@ export default function Home() {
       {/* ─── HERO ─── */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <HeroSceneLoader />
+        <HeroParticles />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-32 sm:py-40">
           <Reveal>
-            <h1 className="text-[clamp(3rem,7vw,6rem)] font-extrabold tracking-tight leading-[1.02] max-w-5xl">
-              <span className="gradient-text">
-                We build the AI your business actually needs.
+            <h1 className="text-[clamp(3rem,7vw,6rem)] font-black tracking-[-0.04em] leading-[1.02] max-w-5xl">
+              <span className="text-white">We build the </span>
+              <span
+                className="font-serif-accent shimmer-text"
+                style={{
+                  background: "linear-gradient(135deg, #0FF0A0, #0AC97E, #0FF0A0)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                AI
               </span>
+              <span className="text-white"> your business actually needs.</span>
             </h1>
           </Reveal>
 
@@ -31,17 +44,11 @@ export default function Home() {
 
           <Reveal delay={0.3}>
             <div className="mt-12 flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/contact"
-                className="btn-glow btn-pulse inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-navy-deep bg-highlight rounded-full hover:bg-highlight-dark transition-colors duration-200"
-              >
+              <Link href="/contact" className="btn-primary">
                 Request a Custom Quote
                 <ArrowRight size={16} className="ml-2" />
               </Link>
-              <Link
-                href="/agents"
-                className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-white/70 border border-white/10 rounded-full hover:bg-white/5 hover:border-white/20 transition-all duration-200"
-              >
+              <Link href="/agents" className="btn-secondary">
                 See What We Build
               </Link>
             </div>
@@ -56,6 +63,18 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── MARQUEE ─── */}
+      <Marquee />
+
+      {/* ─── STATS BAR ─── */}
+      <section className="py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <StatsBar />
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
       {/* ─── WHAT WE DO ─── */}
       <section className="py-36 sm:py-44">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -66,7 +85,7 @@ export default function Home() {
               "We build and deploy.",
             ].map((line, i) => (
               <Reveal key={line} delay={i * 0.12}>
-                <p className="text-2xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white/80">
+                <p className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-[-0.04em] text-white/80">
                   {line}
                 </p>
               </Reveal>
@@ -74,6 +93,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <div className="section-divider" />
 
       {/* ─── BENTO GRID ─── */}
       <section className="pb-36 sm:pb-44">
@@ -93,8 +114,10 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="section-divider" />
+
       {/* ─── HOW WE WORK ─── */}
-      <section className="py-36 sm:py-44 border-t border-white/5">
+      <section className="py-36 sm:py-44">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="text-center mb-24">
@@ -110,8 +133,10 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="section-divider" />
+
       {/* ─── CASE STUDY TEASER ─── */}
-      <section className="py-36 sm:py-44 border-t border-white/5">
+      <section className="py-36 sm:py-44">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="relative rounded-3xl glass p-10 sm:p-16 overflow-hidden">
@@ -147,8 +172,10 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="section-divider" />
+
       {/* ─── FINAL CTA ─── */}
-      <section className="py-36 sm:py-44 border-t border-white/5">
+      <section className="py-36 sm:py-44">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="relative rounded-3xl glass p-10 sm:p-16 text-center overflow-hidden">
@@ -162,10 +189,7 @@ export default function Home() {
                   Tell us what you need. We&apos;ll tell you how AI can solve it
                   — and build it for you.
                 </p>
-                <Link
-                  href="/contact"
-                  className="btn-glow btn-pulse inline-flex items-center mt-10 px-8 py-3.5 text-sm font-semibold text-navy-deep bg-highlight rounded-full hover:bg-highlight-dark transition-colors duration-200"
-                >
+                <Link href="/contact" className="btn-primary mt-10">
                   Request a Custom Quote
                   <ArrowRight size={16} className="ml-2" />
                 </Link>

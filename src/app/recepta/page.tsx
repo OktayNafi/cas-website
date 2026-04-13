@@ -67,14 +67,14 @@ export default function ReceptaPage() {
                   href="https://recepta-gilt.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-glow inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-navy-deep bg-highlight rounded-full hover:bg-highlight-dark transition-colors"
+                  className="btn-primary"
                 >
                   Start Free Trial
                   <ArrowRight size={16} className="ml-2" />
                 </a>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-white/70 border border-white/10 rounded-full hover:bg-white/5 transition-all"
+                  className="btn-secondary"
                 >
                   Book a Demo
                 </Link>
@@ -152,10 +152,8 @@ export default function ReceptaPage() {
                     href="https://recepta-gilt.vercel.app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`mt-8 w-full inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-full transition-all ${
-                      plan.popular
-                        ? "btn-glow text-navy-deep bg-highlight hover:bg-highlight-dark"
-                        : "text-white/70 border border-white/10 hover:bg-white/5"
+                    className={`mt-8 w-full ${
+                      plan.popular ? "btn-primary" : "btn-secondary"
                     }`}
                   >
                     Get Started
@@ -183,14 +181,14 @@ export default function ReceptaPage() {
                 href="https://recepta-gilt.vercel.app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-glow inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-navy-deep bg-highlight rounded-full hover:bg-highlight-dark transition-colors"
+                className="btn-primary"
               >
                 Sign Up Now
                 <ArrowRight size={16} className="ml-2" />
               </a>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-white/70 border border-white/10 rounded-full hover:bg-white/5 transition-all"
+                className="btn-secondary"
               >
                 Talk to Us First
               </Link>
