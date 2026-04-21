@@ -23,7 +23,10 @@ export default function PrivacyPage() {
             Company AI Solutions Ltd (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal data in accordance with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018.
           </S>
           <S title="2. Data Controller">
-            The data controller is Company AI Solutions Ltd, registered in England & Wales. Contact: info@companyaisolutions.co.uk.
+            The data controller is Company AI Solutions Ltd (Company Number 17143276), whose registered office is at 46 Medway Drive, Northampton, England, NN5 7NY. Contact: info@companyaisolutions.co.uk.
+          </S>
+          <S title="2a. ICO Registration">
+            Company AI Solutions Ltd is registered with the Information Commissioner&apos;s Office (ICO) as a data controller under the Data Protection Act 2018. You may verify our registration or file complaints via the ICO at ico.org.uk.
           </S>
           <S title="3. Information We Collect">
             We may collect: name, email, phone number, company name (via our contact form); usage data and analytics; communication records; and any information you voluntarily provide.

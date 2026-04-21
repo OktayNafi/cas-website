@@ -137,7 +137,7 @@ body::after {
   border-radius: inherit;
   background: radial-gradient(
     600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(15, 240, 160, 0.08),
+    rgba(59, 130, 246, 0.06),
     transparent 40%
   );
   opacity: 0;
@@ -147,7 +147,7 @@ body::after {
 
 .agent-card:hover {
   background: rgba(255, 255, 255, 0.04);
-  box-shadow: inset 0 0 0 1px rgba(15, 240, 160, 0.25), 0 0 20px rgba(15, 240, 160, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.1);
 }
 
 .agent-card:hover::before {
@@ -183,7 +183,7 @@ body::after {
   font-weight: 700;
   box-shadow:
     0 4px 0 #0BD488,
-    0 0 40px rgba(15, 240, 160, 0.4);
+    0 0 20px rgba(15, 240, 160, 0.2);
   transition: all 0.15s ease;
 }
 
@@ -191,14 +191,14 @@ body::after {
   transform: translateY(2px);
   box-shadow:
     0 2px 0 #0BD488,
-    0 0 50px rgba(15, 240, 160, 0.5);
+    0 0 25px rgba(15, 240, 160, 0.25);
 }
 
 .btn-primary:active {
   transform: translateY(4px);
   box-shadow:
     0 0 0 #0BD488,
-    0 0 30px rgba(15, 240, 160, 0.3);
+    0 0 15px rgba(15, 240, 160, 0.15);
 }
 
 /* ── Secondary button ── */

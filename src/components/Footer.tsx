@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const footerLinks = [
@@ -32,17 +33,15 @@ export default function Footer() {
   return (
     <footer className="relative z-10 border-t border-highlight/10">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 sm:py-28">
-        {/* Huge outlined CAS logo */}
+        {/* Logo */}
         <div className="mb-16">
-          <span
-            className="text-[20vw] sm:text-[16vw] lg:text-[12vw] font-black leading-none tracking-tighter select-none"
-            style={{
-              WebkitTextStroke: "2px rgba(15, 240, 160, 0.15)",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            CAS.
-          </span>
+          <Image
+            src="/logo-white.svg"
+            alt="Company AI Solutions"
+            width={200}
+            height={80}
+            className="h-auto w-[200px] opacity-90"
+          />
         </div>
 
         {/* Tagline */}

@@ -21,11 +21,9 @@ export default function Home() {
             <h1 className="text-[clamp(3rem,7vw,6rem)] font-black tracking-[-0.04em] leading-[1.02] max-w-5xl">
               <span className="text-white">We build the </span>
               <span
-                className="font-serif-accent shimmer-text"
+                className="font-serif-accent"
                 style={{
-                  background: "linear-gradient(135deg, #0FF0A0, #0AC97E, #0FF0A0)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
+                  color: "#0FF0A0",
                 }}
               >
                 AI

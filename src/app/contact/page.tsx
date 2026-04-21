@@ -43,7 +43,8 @@ export default function ContactPage() {
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    if (data.get("website")) {
+    // Client-side honeypot short-circuit (bots won't reach the network either)
+    if (data.get("company_url")) {
       setStatus("success");
       return;
     }
@@ -62,9 +63,14 @@ export default function ContactPage() {
           budget: data.get("budget"),
           timeline: data.get("timeline"),
           message: data.get("message"),
+          company_url: data.get("company_url"),
         }),
       });
 
+      if (res.status === 429) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || "Too many requests. Please try again later.");
+      }
       if (!res.ok) throw new Error("Something went wrong. Please try again.");
       setStatus("success");
       form.reset();
@@ -148,14 +154,28 @@ export default function ContactPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Honeypot */}
-                <input
-                  type="text"
-                  name="website"
-                  className="absolute opacity-0 pointer-events-none"
-                  tabIndex={-1}
-                  autoComplete="off"
-                />
+                {/* Honeypot — visually hidden. Humans don't see it; bots fill it. */}
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    left: "-9999px",
+                    width: "1px",
+                    height: "1px",
+                    opacity: 0,
+                    overflow: "hidden",
+                    pointerEvents: "none",
+                  }}
+                >
+                  <label htmlFor="company_url">Leave this field empty</label>
+                  <input
+                    id="company_url"
+                    type="text"
+                    name="company_url"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
 
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>

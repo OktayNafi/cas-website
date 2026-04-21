@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -37,13 +38,15 @@ export default function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-xl font-bold text-white tracking-tight">
-              CAS
-              <span className="text-highlight group-hover:text-accent transition-colors duration-300">
-                .
-              </span>
-            </span>
+          <Link href="/" className="flex items-center group" aria-label="Company AI Solutions — Home">
+            <Image
+              src="/logo-white.svg"
+              alt="Company AI Solutions"
+              width={120}
+              height={48}
+              priority
+              className="h-10 w-auto opacity-90 group-hover:opacity-100 transition-opacity"
+            />
           </Link>
 
           <div className="hidden md:flex items-center gap-1">

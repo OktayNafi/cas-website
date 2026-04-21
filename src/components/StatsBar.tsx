@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
 
 const stats = [
   { value: 7, suffix: "", label: "AI AGENTS" },
@@ -10,15 +9,23 @@ const stats = [
   { value: 100, suffix: "%", label: "UK BUILT" },
 ];
 
-function Counter({ target, suffix, inView }: { target: number; suffix: string; inView: boolean }) {
+function Counter({
+  target,
+  suffix,
+  triggered,
+}: {
+  target: number;
+  suffix: string;
+  triggered: boolean;
+}) {
   const [count, setCount] = useState(0);
-  const hasAnimated = useRef(false);
+  const started = useRef(false);
 
   useEffect(() => {
-    if (!inView || hasAnimated.current) return;
-    hasAnimated.current = true;
+    if (!triggered || started.current) return;
+    started.current = true;
 
-    const duration = 1500;
+    const duration = 2000;
     const startTime = performance.now();
 
     const tick = (now: number) => {
@@ -30,7 +37,7 @@ function Counter({ target, suffix, inView }: { target: number; suffix: string; i
     };
 
     requestAnimationFrame(tick);
-  }, [inView, target]);
+  }, [triggered, target]);
 
   return (
     <span>
@@ -42,32 +49,62 @@ function Counter({ target, suffix, inView }: { target: number; suffix: string; i
 
 export default function StatsBar() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const [triggered, setTriggered] = useState(false);
+
+  useEffect(() => {
+    // Fallback: if IntersectionObserver never fires (SSR edge cases, reduced motion
+    // blockers, or the section is already above the fold), trigger after 3s.
+    const fallback = setTimeout(() => setTriggered(true), 3000);
+
+    if (typeof IntersectionObserver === "undefined") {
+      // Very old browsers — just trigger immediately.
+      setTriggered(true);
+      clearTimeout(fallback);
+      return;
+    }
+
+    const el = ref.current;
+    if (!el) return () => clearTimeout(fallback);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setTriggered(true);
+            observer.disconnect();
+            clearTimeout(fallback);
+            break;
+          }
+        }
+      },
+      { rootMargin: "-100px" }
+    );
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallback);
+    };
+  }, []);
 
   return (
     <div ref={ref} className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
-      {stats.map((stat, i) => (
-        <motion.div
-          key={stat.label}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: i * 0.1 }}
-          className="text-center"
-        >
+      {stats.map((stat) => (
+        <div key={stat.label} className="text-center">
           <div
-            className="text-[80px] sm:text-[80px] lg:text-[80px] leading-none"
+            className="text-[80px] leading-none"
             style={{
               color: "#0FF0A0",
               fontWeight: 900,
-              textShadow: "0 0 30px rgba(15, 240, 160, 0.3)",
+              textShadow: "0 0 15px rgba(15, 240, 160, 0.15)",
             }}
           >
-            <Counter target={stat.value} suffix={stat.suffix} inView={inView} />
+            <Counter target={stat.value} suffix={stat.suffix} triggered={triggered} />
           </div>
           <p className="mt-3 text-[10px] sm:text-xs font-semibold tracking-[0.2em] text-white/40">
             {stat.label}
           </p>
-        </motion.div>
+        </div>
       ))}
     </div>
   );
