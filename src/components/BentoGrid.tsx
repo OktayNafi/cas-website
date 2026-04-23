@@ -1,228 +1,104 @@
 "use client";
 
-import { useRef, useCallback } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-  Phone,
-  Users,
-  Headphones,
-  Workflow,
-  Code,
-  BrainCircuit,
-  ClipboardList,
-  ArrowUpRight,
-} from "lucide-react";
-import {
-  SoundWave,
-  ArrowChart,
-  TypingBubble,
-  NodeDiagram,
-  KanbanBoard,
-  WireframeCube,
-  LightbulbRays,
-} from "./CardAnimations";
+import { motion } from "framer-motion";
 
-const agents = [
+type Agent = {
+  href: string;
+  tag: string;
+  title: string;
+  description: string;
+  className: string;
+};
+
+const agents: Agent[] = [
   {
-    icon: Phone,
-    title: "Recepta",
-    subtitle: "AI Receptionist",
-    description:
-      "Answers calls 24/7, books appointments, handles enquiries. Sounds natural. Never takes a day off. Already live and deployed.",
     href: "/recepta",
-    live: true,
-    price: "Custom pricing",
-    Animation: SoundWave,
+    tag: "LIVE",
+    title: "Recepta — AI Phone Receptionist",
+    description:
+      "Answers your business calls 24/7. Collects caller details, determines urgency, sends you an instant summary. Never miss a customer.",
+    className: "md:col-span-2",
   },
   {
-    icon: Users,
-    title: "Lead Generation",
-    subtitle: "AI Prospecting Agent",
-    description:
-      "Automated outreach that finds, qualifies, and engages your ideal customers across channels.",
-    href: "/agents#lead-generation",
-    price: "Custom pricing",
-    Animation: ArrowChart,
-  },
-  {
-    icon: Headphones,
-    title: "Customer Support",
-    subtitle: "AI Support Agent",
-    description:
-      "Resolves tickets, answers FAQs, escalates intelligently. Response times drop from hours to seconds.",
-    href: "/agents#customer-support",
-    price: "Custom pricing",
-    Animation: TypingBubble,
-  },
-  {
-    icon: Workflow,
-    title: "Workflow Automation",
-    subtitle: "AI Process Agent",
-    description:
-      "Connects your tools, eliminates manual tasks. If it's repetitive, we automate it.",
-    href: "/agents#workflow",
-    price: "Custom pricing",
-    Animation: NodeDiagram,
-  },
-  {
-    icon: Code,
-    title: "Custom AI Development",
-    subtitle: "Bespoke Agents",
-    description:
-      "Full-stack AI applications built to your exact specifications. From concept to production. Currently building for Mediwell Clinic.",
-    href: "/agents#custom-dev",
-    price: "Custom pricing",
-    Animation: WireframeCube,
-  },
-  {
-    icon: ClipboardList,
-    title: "AI Project Manager",
-    subtitle: "AI Coordination Agent",
-    description:
-      "Strategic planning, task delegation, progress tracking, and decision-making. Your AI PM coordinates everything — so you focus on the vision.",
     href: "/agents#project-manager",
-    price: "Included with retainers",
-    Animation: KanbanBoard,
+    tag: "INCLUDED WITH RETAINERS",
+    title: "AI Project Manager",
+    description:
+      "Strategic planning, task delegation, progress tracking. Your AI PM coordinates everything so you focus on the vision.",
+    className: "md:col-span-1",
   },
   {
-    icon: BrainCircuit,
-    title: "Consulting & Strategy",
-    subtitle: "AI Advisory",
+    href: "/agents#custom-dev",
+    tag: "ACTIVE PROJECT",
+    title: "Custom AI App Development",
     description:
-      "Expert guidance on where AI fits in your business and how to get there.",
+      "Bespoke AI-powered applications built to your specification. Mobile apps, web platforms, dashboards.",
+    className: "md:col-span-2",
+  },
+  {
+    href: "/agents#lead-generation",
+    tag: "COMING SOON",
+    title: "AI Lead Generation",
+    description:
+      "Contacts your leads within 10 seconds. Qualifies, books appointments, follows up automatically.",
+    className: "md:col-span-1",
+  },
+  {
+    href: "/agents#support",
+    tag: "COMING SOON",
+    title: "AI Customer Support",
+    description:
+      "24/7 chatbot on your website and WhatsApp, trained on your knowledge base.",
+    className: "md:col-span-1",
+  },
+  {
+    href: "/agents#automation",
+    tag: "COMING SOON",
+    title: "Workflow Automation",
+    description:
+      "Connects your tools, eliminates repetitive admin. Invoice processing, data entry, report generation.",
+    className: "md:col-span-1",
+  },
+  {
     href: "/agents#consulting",
-    price: "Custom pricing",
-    Animation: LightbulbRays,
+    tag: "AVAILABLE NOW",
+    title: "AI Consulting & Strategy",
+    description:
+      "We audit your operations, identify where AI saves money, and build a roadmap.",
+    className: "md:col-span-1",
   },
 ];
 
-function Card({
-  agent,
-  index,
-}: {
-  agent: (typeof agents)[0];
-  index: number;
-}) {
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const el = cardRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -4;
-    const rotateY = ((x - centerX) / centerX) * 4;
-    el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01,1.01,1.01)`;
-    el.style.setProperty("--mouse-x", `${(x / rect.width) * 100}%`);
-    el.style.setProperty("--mouse-y", `${(y / rect.height) * 100}%`);
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    const el = cardRef.current;
-    if (!el) return;
-    el.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)";
-  }, []);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
-      <Link href={agent.href} className="group block h-full">
-        <div
-          ref={cardRef}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-          className="relative h-full rounded-2xl agent-card p-7 sm:p-8 overflow-hidden"
-          style={{ transition: "transform 0.2s ease-out" }}
-        >
-          <div className="relative z-10">
-            <div className="flex items-start justify-between mb-5">
-              <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
-                <agent.icon size={22} />
-              </div>
-              <div className="flex items-center gap-2">
-                {agent.live && (
-                  <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-highlight bg-highlight/10 rounded-full">
-                    <span className="w-1.5 h-1.5 bg-highlight rounded-full animate-pulse" />
-                    Live
-                  </span>
-                )}
-                <ArrowUpRight
-                  size={16}
-                  className="text-white/15 group-hover:text-white/40 transition-colors duration-300"
-                />
-              </div>
-            </div>
-
-            <h3 className="text-lg font-semibold text-white mb-0.5">
-              {agent.title}
-            </h3>
-            <p className="text-xs text-accent/70 font-medium mb-3">
-              {agent.subtitle}
-            </p>
-            <p className="text-sm text-white/35 leading-relaxed mb-4">
-              {agent.description}
-            </p>
-            <div className="flex items-center justify-between">
-              <p className="text-xs font-medium text-highlight/70">
-                {agent.price}
-              </p>
-              {agent.Animation && <agent.Animation />}
-            </div>
-          </div>
-        </div>
-      </Link>
-    </motion.div>
-  );
-}
-
 export default function BentoGrid() {
-  // Reordered: Recepta, PM, Custom Dev, Lead Gen, Support, Workflow, Consulting
-  const recepta = agents[0];
-  const pm = agents[5];
-  const customDev = agents[4];
-  const leadGen = agents[1];
-  const support = agents[2];
-  const workflow = agents[3];
-  const consulting = agents[6];
-
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {/* Row 1: Recepta (2 cols, tall) + PM (1 col, tall) */}
-      <div className="sm:col-span-2 lg:row-span-2">
-        <Card agent={recepta} index={0} />
-      </div>
-      <div className="lg:row-span-2">
-        <Card agent={pm} index={1} />
-      </div>
-
-      {/* Row 1 right: Custom Dev (wide) */}
-      <div className="lg:row-span-2">
-        <Card agent={customDev} index={2} />
-      </div>
-
-      {/* Row 2: Lead Gen + Support + Workflow */}
-      <div>
-        <Card agent={leadGen} index={3} />
-      </div>
-      <div>
-        <Card agent={support} index={4} />
-      </div>
-      <div>
-        <Card agent={workflow} index={5} />
-      </div>
-
-      {/* Row 3: Consulting spans full bottom */}
-      <div className="sm:col-span-2 lg:col-span-4">
-        <Card agent={consulting} index={6} />
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {agents.map((a, i) => (
+        <motion.div
+          key={a.title}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+          className={a.className}
+        >
+          <Link
+            href={a.href}
+            className="group block h-full bg-white border border-[#E5E7EB] p-10 transition-colors duration-300 hover:bg-[#0A0A0A]"
+            style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
+          >
+            <p className="text-[12px] font-medium uppercase tracking-[0.15em] text-[#6B7280] group-hover:text-white transition-colors duration-300">
+              {a.tag}
+            </p>
+            <h3 className="mt-6 text-[24px] font-semibold text-[#0A0A0A] group-hover:text-white tracking-[-0.01em] leading-tight transition-colors duration-300">
+              {a.title}
+            </h3>
+            <p className="mt-4 text-[16px] text-[#1F2937] group-hover:text-white leading-[1.7] transition-colors duration-300">
+              {a.description}
+            </p>
+          </Link>
+        </motion.div>
+      ))}
     </div>
   );
 }

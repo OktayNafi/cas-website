@@ -1,10 +1,8 @@
-"use client";
-
 import Link from "next/link";
-import Image from "next/image";
-import { motion } from "framer-motion";
+import Logo from "./Logo";
 
-const footerLinks = [
+const navLinks = [
+  { href: "/", label: "Home" },
   { href: "/agents", label: "Agents" },
   { href: "/recepta", label: "Recepta" },
   { href: "/case-studies", label: "Case Studies" },
@@ -14,94 +12,65 @@ const footerLinks = [
   { href: "/terms", label: "Terms" },
 ];
 
-function ArrowLink({ href, label }: { href: string; label: string }) {
-  return (
-    <Link href={href} className="group flex items-center gap-2 text-sm text-white/40 hover:text-highlight transition-colors duration-200">
-      <motion.span
-        className="inline-block"
-        whileHover={{ x: 4 }}
-        transition={{ type: "spring", stiffness: 400, damping: 20 }}
-      >
-        &rarr;
-      </motion.span>
-      {label}
-    </Link>
-  );
-}
-
 export default function Footer() {
   return (
-    <footer className="relative z-10 border-t border-highlight/10">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 sm:py-28">
-        {/* Logo */}
-        <div className="mb-16">
-          <Image
-            src="/logo-white.svg"
-            alt="Company AI Solutions"
-            width={200}
-            height={80}
-            className="h-auto w-[200px] opacity-90"
-          />
-        </div>
-
-        {/* Tagline */}
-        <p className="text-xl sm:text-2xl lg:text-3xl font-black tracking-[-0.03em] text-white/60 max-w-2xl mb-16">
-          WE IMPLEMENT AI INTO YOUR BUSINESS.
-        </p>
-
-        {/* Links + Info */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 mb-16">
-          <div className="col-span-2 sm:col-span-1">
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/20 mb-4">
-              Navigate
-            </h3>
-            <div className="space-y-3">
-              {footerLinks.slice(0, 5).map((link) => (
-                <ArrowLink key={link.href} href={link.href} label={link.label} />
-              ))}
-            </div>
-          </div>
-
+    <footer className="bg-[#FAFAFA] border-t border-[#E5E7EB]">
+      <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-28">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+          {/* Left: logo + tagline */}
           <div>
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/20 mb-4">
-              Legal
-            </h3>
-            <div className="space-y-3">
-              {footerLinks.slice(5).map((link) => (
-                <ArrowLink key={link.href} href={link.href} label={link.label} />
-              ))}
-            </div>
+            <Logo size="lg" />
+            <p className="mt-6 text-[14px] italic text-[#6B7280] max-w-xs">
+              We implement AI into your business.
+            </p>
           </div>
 
-          <div className="col-span-2 sm:col-span-1">
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/20 mb-4">
-              Connect
-            </h3>
-            <div className="space-y-3">
-              <a
-                href="mailto:info@companyaisolutions.co.uk"
-                className="group flex items-center gap-2 text-sm text-white/40 hover:text-highlight transition-colors duration-200"
-              >
-                <span>&rarr;</span>
-                info@companyaisolutions.co.uk
-              </a>
-              <a
-                href="https://www.linkedin.com/company/companyaisolutions"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-2 text-sm text-white/40 hover:text-highlight transition-colors duration-200"
-              >
-                <span>&rarr;</span>
-                LinkedIn
-              </a>
-            </div>
+          {/* Center: links */}
+          <div>
+            <p className="eyebrow mb-5">Navigate</p>
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-3">
+              {navLinks.map((l) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className="link-underline text-[15px] text-[#0A0A0A]"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Right: contact */}
+          <div>
+            <p className="eyebrow mb-5">Contact</p>
+            <ul className="space-y-3">
+              <li>
+                <a
+                  href="mailto:info@companyaisolutions.co.uk"
+                  className="link-underline text-[15px] text-[#0A0A0A]"
+                >
+                  info@companyaisolutions.co.uk
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://companyaisolutions.co.uk"
+                  className="link-underline text-[15px] text-[#0A0A0A]"
+                >
+                  companyaisolutions.co.uk
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-8 border-t border-white/5">
-          <p className="text-[11px] text-white/15">
-            &copy; {new Date().getFullYear()} Company AI Solutions Ltd. Registered in England &amp; Wales. Registered with the ICO.
+        <div className="mt-16 pt-8 border-t border-[#E5E7EB]">
+          <p className="text-[12px] text-[#6B7280] leading-relaxed">
+            &copy; {new Date().getFullYear()} CompanyAiSolutions Ltd. Company
+            Number 17143276. Registered in England and Wales. 46 Medway Drive,
+            Northampton, NN5 7NY.
           </p>
         </div>
       </div>

@@ -59,11 +59,12 @@ export async function POST(req: NextRequest) {
       budget,
       timeline,
       message,
+      website,
       company_url,
     } = body;
 
     // ── Honeypot: if filled, silently succeed without sending ──
-    if (company_url) {
+    if (website || company_url) {
       return NextResponse.json({ success: true });
     }
 

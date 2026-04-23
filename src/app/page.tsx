@@ -1,208 +1,139 @@
 import Link from "next/link";
-import { ArrowRight, Lock } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import BentoGrid from "@/components/BentoGrid";
 import ProcessSteps from "@/components/ProcessSteps";
-import HeroSceneLoader from "@/components/HeroSceneLoader";
-import HeroParticles from "@/components/HeroParticles";
-import Marquee from "@/components/Marquee";
 import StatsBar from "@/components/StatsBar";
+import QuoteForm from "@/components/QuoteForm";
 
 export default function Home() {
   return (
     <>
-      {/* ─── HERO ─── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        <HeroSceneLoader />
-        <HeroParticles />
-
-        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-32 sm:py-40">
-          <Reveal>
-            <h1 className="text-[clamp(3rem,7vw,6rem)] font-black tracking-[-0.04em] leading-[1.02] max-w-5xl">
-              <span className="text-white">We build the </span>
-              <span
-                className="font-serif-accent"
-                style={{
-                  color: "#0FF0A0",
-                }}
-              >
-                AI
-              </span>
-              <span className="text-white"> your business actually needs.</span>
-            </h1>
+      {/* HERO */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 min-h-[calc(100vh-4rem)] flex flex-col justify-center py-32 md:py-40">
+          <Reveal y={20}>
+            <p className="eyebrow">AI Implementation Company</p>
           </Reveal>
 
-          <Reveal delay={0.15}>
-            <p className="mt-8 text-base sm:text-lg text-white/40 max-w-2xl leading-relaxed">
-              Custom AI agents, integrated into your workflow, delivered by
-              Company AI Solutions. From AI receptionists to bespoke
-              automations — if a process can be improved with AI, we build it.
+          <div className="mt-8 max-w-5xl">
+            <Reveal delay={0.05} y={30}>
+              <h1 className="hero-title">We build the AI</h1>
+            </Reveal>
+            <Reveal delay={0.2} y={30}>
+              <h1 className="hero-title">your business</h1>
+            </Reveal>
+            <Reveal delay={0.35} y={30}>
+              <h1 className="hero-title">actually needs.</h1>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.55}>
+            <p className="mt-10 text-[20px] text-[#1F2937] max-w-xl leading-[1.7]">
+              Custom AI agents designed, built, and deployed for your workflow.
+              From phone receptionists to patient booking apps — if it can be
+              smarter, we build it.
             </p>
           </Reveal>
 
-          <Reveal delay={0.3}>
-            <div className="mt-12 flex flex-col sm:flex-row gap-4">
+          <Reveal delay={0.7}>
+            <div className="mt-12 flex flex-col sm:flex-row gap-3">
               <Link href="/contact" className="btn-primary">
-                Request a Custom Quote
-                <ArrowRight size={16} className="ml-2" />
+                Request a Quote
               </Link>
-              <Link href="/agents" className="btn-secondary">
-                See What We Build
+              <Link href="/case-studies" className="btn-secondary">
+                See Our Work
               </Link>
             </div>
-          </Reveal>
-
-          <Reveal delay={0.45}>
-            <p className="mt-14 text-[11px] text-white/20 flex items-center gap-1.5">
-              <Lock size={10} />
-              Powered by Company AI Solutions Ltd — Registered in England & Wales
-            </p>
           </Reveal>
         </div>
       </section>
 
-      {/* ─── MARQUEE ─── */}
-      <Marquee />
-
-      {/* ─── STATS BAR ─── */}
-      <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      {/* STATS */}
+      <section className="bg-[#FAFAFA] border-y border-[#E5E7EB]">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-28">
           <StatsBar />
         </div>
       </section>
 
-      <div className="section-divider" />
-
-      {/* ─── WHAT WE DO ─── */}
-      <section className="py-36 sm:py-44">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-4xl space-y-2">
-            {[
-              "We audit your business.",
-              "We design the AI.",
-              "We build and deploy.",
-            ].map((line, i) => (
-              <Reveal key={line} delay={i * 0.12}>
-                <p className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-[-0.04em] text-white/80">
-                  {line}
-                </p>
-              </Reveal>
-            ))}
+      {/* BENTO */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-40">
+          <Reveal>
+            <p className="eyebrow">What We Build</p>
+            <h2 className="section-title mt-4 max-w-3xl">
+              Seven AI agents, one company.
+            </h2>
+          </Reveal>
+          <div className="mt-16">
+            <BentoGrid />
           </div>
         </div>
       </section>
 
-      <div className="section-divider" />
-
-      {/* ─── BENTO GRID ─── */}
-      <section className="pb-36 sm:pb-44">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      {/* PROCESS */}
+      <section className="bg-[#FAFAFA] border-y border-[#E5E7EB]">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-40">
           <Reveal>
-            <div className="mb-16">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-highlight/70 mb-3">
-                — Our Services
-              </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                AI agents we build
-              </h2>
-              <p className="mt-3 text-sm text-white/30">
-                Seven product lines. Infinite configurations. Every agent is
-                custom-built for your business.
-              </p>
-            </div>
+            <p className="eyebrow">Our Process</p>
+            <h2 className="section-title mt-4 max-w-3xl">
+              Four steps to smarter operations.
+            </h2>
           </Reveal>
-          <BentoGrid />
+          <div className="mt-20">
+            <ProcessSteps />
+          </div>
         </div>
       </section>
 
-      <div className="section-divider" />
-
-      {/* ─── HOW WE WORK ─── */}
-      <section className="py-36 sm:py-44">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      {/* CASE STUDY */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-40">
           <Reveal>
-            <div className="text-center mb-24">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-highlight/70 mb-3">
-                — Our Process
-              </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                How we work
-              </h2>
-              <p className="mt-3 text-sm text-white/30">
-                From first call to live deployment in weeks, not months.
-              </p>
-            </div>
+            <p className="eyebrow">Client Work</p>
+            <h2 className="section-title mt-4">Mediwell Healthcare</h2>
           </Reveal>
-          <ProcessSteps />
-        </div>
-      </section>
 
-      <div className="section-divider" />
+          <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            <Reveal>
+              <p className="text-[18px] text-[#1F2937] leading-[1.7]">
+                A private medical clinic in London seeing 30–40 patients daily
+                across 11 specialties. We built a custom iOS app for patient
+                self-booking, video consultations, medical history intake, and
+                in-app payments — powered by Company AI Solutions.
+              </p>
+              <p className="mt-6 text-[14px] italic text-[#6B7280]">
+                Case study available on request.
+              </p>
+            </Reveal>
 
-      {/* ─── CASE STUDY TEASER ─── */}
-      <section className="py-36 sm:py-44">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <Reveal>
-            <div className="relative rounded-3xl glass p-10 sm:p-16 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent pointer-events-none" />
-              <div className="absolute top-0 right-0 w-1/3 h-full bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.08),transparent_70%)] pointer-events-none" />
-
-              <div className="relative max-w-2xl">
-                <span className="text-[10px] font-semibold uppercase tracking-widest text-accent/70">
-                  Active Project
+            <Reveal delay={0.1}>
+              <div
+                className="aspect-[4/5] bg-[#F0F0F0] border border-[#E5E7EB] flex items-center justify-center"
+                aria-label="App preview placeholder"
+              >
+                <span className="text-[14px] text-[#6B7280]">
+                  App Preview Coming Soon
                 </span>
-                <h2 className="mt-3 text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                  Mediwell Clinic
-                </h2>
-                <p className="mt-1 text-sm text-white/30">
-                  Private medical clinic — London, UK
-                </p>
-                <p className="mt-6 text-white/40 leading-relaxed">
-                  Building a custom patient booking and video consultation app
-                  for a private medical clinic in London. AI-powered scheduling,
-                  payments, and doctor-patient video calls — all in one iOS app.
-                  Case study coming on launch.
-                </p>
-                <Link
-                  href="/case-studies"
-                  className="inline-flex items-center mt-8 text-sm font-medium text-accent hover:text-accent-light transition-colors duration-200"
-                >
-                  Learn more
-                  <ArrowRight size={14} className="ml-1.5" />
-                </Link>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      <div className="section-divider" />
-
-      {/* ─── FINAL CTA ─── */}
-      <section className="py-36 sm:py-44">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      {/* QUOTE FORM */}
+      <section id="quote" className="bg-[#FAFAFA] border-t border-[#E5E7EB]">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-40">
           <Reveal>
-            <div className="relative rounded-3xl glass p-10 sm:p-16 text-center overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-highlight/3 via-transparent to-accent/3 pointer-events-none" />
-
-              <div className="relative">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-highlight/70 mb-3">
-                  — Get Started
-                </p>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight max-w-2xl mx-auto">
-                  Ready to build something?
-                </h2>
-                <p className="mt-4 text-base text-white/30 max-w-lg mx-auto">
-                  Tell us what you need. We&apos;ll tell you how AI can solve it
-                  — and build it for you.
-                </p>
-                <Link href="/contact" className="btn-primary mt-10">
-                  Request a Custom Quote
-                  <ArrowRight size={16} className="ml-2" />
-                </Link>
-              </div>
-            </div>
+            <p className="eyebrow">Get Started</p>
+            <h2 className="section-title mt-4">Request a custom quote.</h2>
+            <p className="mt-4 text-[18px] text-[#1F2937] max-w-xl leading-[1.7]">
+              Tell us what you need. We&apos;ll come back with a plan.
+            </p>
           </Reveal>
+
+          <div className="mt-16 max-w-2xl">
+            <QuoteForm />
+          </div>
         </div>
       </section>
 
@@ -218,8 +149,16 @@ export default function Home() {
               "Custom AI agents for mid-size businesses. We build, deploy, and maintain AI systems.",
             url: "https://companyaisolutions.co.uk",
             email: "info@companyaisolutions.co.uk",
-            address: { "@type": "PostalAddress", addressCountry: "GB" },
-            sameAs: ["https://www.linkedin.com/company/companyaisolutions"],
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "46 Medway Drive",
+              addressLocality: "Northampton",
+              postalCode: "NN5 7NY",
+              addressCountry: "GB",
+            },
+            sameAs: [
+              "https://www.linkedin.com/company/companyaisolutions",
+            ],
           }),
         }}
       />

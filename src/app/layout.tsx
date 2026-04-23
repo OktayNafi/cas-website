@@ -3,8 +3,6 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import LoadingScreen from "@/components/LoadingScreen";
-import CustomCursor from "@/components/CustomCursor";
 import CookieBanner from "@/components/CookieBanner";
 
 export const metadata: Metadata = {
@@ -13,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s | Company AI Solutions",
   },
   description:
-    "Custom AI agents, integrated into your workflow. From AI receptionists to bespoke automations — if a process can be improved with AI, we build it.",
+    "Custom AI agents designed, built, and deployed for your workflow. From phone receptionists to patient booking apps, if it can be smarter, we build it.",
   keywords: [
     "AI agents",
     "custom AI",
@@ -31,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "Company AI Solutions",
     title: "Company AI Solutions | We build the AI your business actually needs",
     description:
-      "Custom AI agents, integrated into your workflow, delivered by Company AI Solutions.",
+      "Custom AI agents designed, built, and deployed for your workflow.",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
@@ -50,18 +48,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body className={`${GeistSans.className} antialiased`}>
-        <LoadingScreen />
-        <CustomCursor />
-        <div className="mesh-gradient" aria-hidden="true" />
         <Navbar />
-        <main className="relative z-10 min-h-screen pt-16">{children}</main>
+        <main className="min-h-screen pt-16">{children}</main>
         <Footer />
         <CookieBanner />
       </body>

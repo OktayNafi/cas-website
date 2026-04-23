@@ -12,7 +12,6 @@ const csp = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["three"],
   async headers() {
     return [
       {

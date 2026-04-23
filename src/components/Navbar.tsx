@@ -1,14 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import Logo from "./Logo";
 
-const links = [
-  { href: "/", label: "Home" },
+const navLinks = [
   { href: "/agents", label: "Agents" },
   { href: "/recepta", label: "Recepta" },
   { href: "/case-studies", label: "Case Studies" },
@@ -17,120 +14,90 @@ const links = [
 ];
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   return (
-    <motion.nav
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 nav-glass ${
-        scrolled ? "shadow-lg shadow-black/10" : ""
-      }`}
+    <header
+      className="fixed top-0 inset-x-0 z-50 bg-white border-b border-[#E5E7EB]"
+      style={{
+        boxShadow: scrolled ? "0 1px 3px rgba(0,0,0,0.06)" : "none",
+        transition: "box-shadow 200ms ease",
+      }}
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center group" aria-label="Company AI Solutions — Home">
-            <Image
-              src="/logo-white.svg"
-              alt="Company AI Solutions"
-              width={120}
-              height={48}
-              priority
-              className="h-10 w-auto opacity-90 group-hover:opacity-100 transition-opacity"
-            />
-          </Link>
+      <nav className="mx-auto max-w-[1200px] h-16 px-6 md:px-12 lg:px-0 flex items-center justify-between">
+        <Link href="/" aria-label="Company AI Solutions — Home" className="flex items-center">
+          <Logo size="sm" />
+        </Link>
 
-          <div className="hidden md:flex items-center gap-1">
-            {links.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`relative px-3 py-1.5 text-[13px] transition-colors duration-200 rounded-lg hover:bg-white/5 ${
-                    isActive ? "text-highlight" : "text-white/50 hover:text-white"
-                  }`}
-                >
-                  {link.label}
-                  {isActive && (
-                    <motion.div
-                      layoutId="nav-underline"
-                      className="absolute bottom-0 left-3 right-3 h-px bg-highlight"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((l) => (
             <Link
-              href="/contact"
-              className="btn-primary !px-5 !py-2 !text-[13px]"
+              key={l.href}
+              href={l.href}
+              className="link-underline text-[14px] font-medium text-[#0A0A0A]"
             >
-              Request a Quote
+              {l.label}
             </Link>
-          </div>
+          ))}
+        </div>
 
-          <button
-            onClick={() => setOpen(!open)}
-            className="md:hidden text-white/60 hover:text-white transition-colors"
-            aria-label="Toggle menu"
+        <div className="hidden md:block">
+          <Link href="/contact" className="btn-primary !py-3 !px-7 !text-[14px]">
+            Request a Quote
+          </Link>
+        </div>
+
+        <button
+          className="md:hidden p-2 -mr-2 text-[#0A0A0A]"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          onClick={() => setMenuOpen((o) => !o)}
+        >
+          {menuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </nav>
+
+      {/* Mobile slide-in */}
+      <div
+        className={`md:hidden fixed inset-y-0 right-0 w-full max-w-sm bg-white border-l border-[#E5E7EB] transform transition-transform duration-300 ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+        style={{ top: 64 }}
+      >
+        <div className="flex flex-col p-6 gap-6">
+          {navLinks.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setMenuOpen(false)}
+              className="text-[18px] font-medium text-[#0A0A0A]"
+            >
+              {l.label}
+            </Link>
+          ))}
+          <Link
+            href="/contact"
+            onClick={() => setMenuOpen(false)}
+            className="btn-primary w-full mt-4"
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
+            Request a Quote
+          </Link>
         </div>
       </div>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden overflow-hidden bg-navy-deep/95 backdrop-blur-xl border-t border-white/5"
-          >
-            <div className="px-6 py-6 space-y-1">
-              {links.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="block text-[15px] text-white/60 hover:text-white transition-colors py-2.5"
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-              <div className="pt-4">
-                <Link
-                  href="/contact"
-                  onClick={() => setOpen(false)}
-                  className="btn-primary !px-5 !py-2.5 !text-[13px]"
-                >
-                  Request a Quote
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+    </header>
   );
 }

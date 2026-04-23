@@ -1,48 +1,45 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const stats = [
-  { value: 7, suffix: "", label: "AI AGENTS" },
-  { value: 24, suffix: "/7", label: "UPTIME" },
-  { value: 2, suffix: "", label: "MONTHS DELIVERY" },
-  { value: 100, suffix: "%", label: "UK BUILT" },
+type Stat = {
+  target: number;
+  prefix?: string;
+  suffix?: string;
+  label: string;
+};
+
+const stats: Stat[] = [
+  { target: 7, label: "AI Agents Available" },
+  { target: 24, suffix: "/7", label: "Uptime" },
+  { target: 8, prefix: "<", suffix: " weeks", label: "Typical Delivery" },
+  { target: 100, suffix: "%", label: "UK Built & Hosted" },
 ];
 
-function Counter({
-  target,
-  suffix,
-  triggered,
-}: {
-  target: number;
-  suffix: string;
-  triggered: boolean;
-}) {
+function Counter({ stat, triggered }: { stat: Stat; triggered: boolean }) {
   const [count, setCount] = useState(0);
   const started = useRef(false);
 
   useEffect(() => {
     if (!triggered || started.current) return;
     started.current = true;
-
     const duration = 2000;
-    const startTime = performance.now();
-
+    const start = performance.now();
     const tick = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(eased * target));
-      if (progress < 1) requestAnimationFrame(tick);
+      const elapsed = now - start;
+      const p = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setCount(Math.round(eased * stat.target));
+      if (p < 1) requestAnimationFrame(tick);
     };
-
     requestAnimationFrame(tick);
-  }, [triggered, target]);
+  }, [triggered, stat.target]);
 
   return (
     <span>
+      {stat.prefix ?? ""}
       {count}
-      {suffix}
+      {stat.suffix ?? ""}
     </span>
   );
 }
@@ -52,56 +49,48 @@ export default function StatsBar() {
   const [triggered, setTriggered] = useState(false);
 
   useEffect(() => {
-    // Fallback: if IntersectionObserver never fires (SSR edge cases, reduced motion
-    // blockers, or the section is already above the fold), trigger after 3s.
     const fallback = setTimeout(() => setTriggered(true), 3000);
-
     if (typeof IntersectionObserver === "undefined") {
-      // Very old browsers — just trigger immediately.
       setTriggered(true);
       clearTimeout(fallback);
       return;
     }
-
     const el = ref.current;
     if (!el) return () => clearTimeout(fallback);
-
-    const observer = new IntersectionObserver(
+    const obs = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
+        for (const e of entries) {
+          if (e.isIntersecting) {
             setTriggered(true);
-            observer.disconnect();
+            obs.disconnect();
             clearTimeout(fallback);
             break;
           }
         }
       },
-      { rootMargin: "-100px" }
+      { rootMargin: "-80px" }
     );
-    observer.observe(el);
-
+    obs.observe(el);
     return () => {
-      observer.disconnect();
+      obs.disconnect();
       clearTimeout(fallback);
     };
   }, []);
 
   return (
-    <div ref={ref} className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+    <div
+      ref={ref}
+      className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8"
+    >
       {stats.map((stat) => (
-        <div key={stat.label} className="text-center">
+        <div key={stat.label} className="text-left">
           <div
-            className="text-[80px] leading-none"
-            style={{
-              color: "#0FF0A0",
-              fontWeight: 900,
-              textShadow: "0 0 15px rgba(15, 240, 160, 0.15)",
-            }}
+            className="text-[56px] font-extrabold text-[#0A0A0A] leading-none"
+            style={{ letterSpacing: "-0.03em" }}
           >
-            <Counter target={stat.value} suffix={stat.suffix} triggered={triggered} />
+            <Counter stat={stat} triggered={triggered} />
           </div>
-          <p className="mt-3 text-[10px] sm:text-xs font-semibold tracking-[0.2em] text-white/40">
+          <p className="mt-4 text-[13px] uppercase tracking-[0.1em] text-[#6B7280]">
             {stat.label}
           </p>
         </div>
