@@ -4,25 +4,36 @@ import { useEffect, useRef, useState } from "react";
 
 type Stat = {
   target: number;
+  display?: string;    // if set, renders statically (no count-up)
   prefix?: string;
   suffix?: string;
   label: string;
 };
 
 const stats: Stat[] = [
-  { target: 7, label: "AI Agents Available" },
-  { target: 24, suffix: "/7", label: "Uptime" },
-  { target: 8, prefix: "<", suffix: " weeks", label: "Typical Delivery" },
-  { target: 100, suffix: "%", label: "UK Built & Hosted" },
+  { target: 7, label: "AI Agents" },
+  { target: 0, display: "24/7", label: "Uptime" },
+  { target: 8, prefix: "<", label: "Week Delivery" },
+  { target: 100, suffix: "%", label: "UK Built" },
 ];
 
-function Counter({ stat, triggered }: { stat: Stat; triggered: boolean }) {
+function AnimatedNumber({
+  stat,
+  visible,
+}: {
+  stat: Stat;
+  visible: boolean;
+}) {
   const [count, setCount] = useState(0);
   const started = useRef(false);
 
   useEffect(() => {
-    if (!triggered || started.current) return;
+    if (!visible || started.current) return;
     started.current = true;
+
+    // Static display — no count-up, just show immediately
+    if (stat.display) return;
+
     const duration = 2000;
     const start = performance.now();
     const tick = (now: number) => {
@@ -33,7 +44,9 @@ function Counter({ stat, triggered }: { stat: Stat; triggered: boolean }) {
       if (p < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
-  }, [triggered, stat.target]);
+  }, [visible, stat]);
+
+  if (stat.display) return <span>{stat.display}</span>;
 
   return (
     <span>
@@ -46,34 +59,23 @@ function Counter({ stat, triggered }: { stat: Stat; triggered: boolean }) {
 
 export default function StatsBar() {
   const ref = useRef<HTMLDivElement>(null);
-  const [triggered, setTriggered] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const fallback = setTimeout(() => setTriggered(true), 3000);
-    if (typeof IntersectionObserver === "undefined") {
-      setTriggered(true);
-      clearTimeout(fallback);
-      return;
-    }
-    const el = ref.current;
-    if (!el) return () => clearTimeout(fallback);
-    const obs = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            setTriggered(true);
-            obs.disconnect();
-            clearTimeout(fallback);
-            break;
-          }
-        }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
       },
-      { rootMargin: "-80px" }
+      { threshold: 0.3 }
     );
-    obs.observe(el);
+    if (ref.current) observer.observe(ref.current);
+
+    // Fallback: show final values after 4 seconds regardless
+    const timeout = setTimeout(() => setVisible(true), 4000);
+
     return () => {
-      obs.disconnect();
-      clearTimeout(fallback);
+      observer.disconnect();
+      clearTimeout(timeout);
     };
   }, []);
 
@@ -85,10 +87,10 @@ export default function StatsBar() {
       {stats.map((stat) => (
         <div key={stat.label} className="text-left">
           <div
-            className="text-[56px] font-extrabold text-[#0A0A0A] leading-none"
-            style={{ letterSpacing: "-0.03em" }}
+            className="text-[56px] font-extrabold leading-none"
+            style={{ letterSpacing: "-0.03em", color: "#B87333" }}
           >
-            <Counter stat={stat} triggered={triggered} />
+            <AnimatedNumber stat={stat} visible={visible} />
           </div>
           <p className="mt-4 text-[13px] uppercase tracking-[0.1em] text-[#6B7280]">
             {stat.label}

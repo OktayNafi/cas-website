@@ -28,7 +28,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-[#FAFAFA] border-y border-[#E5E7EB]">
+      <section className="bg-surface-dotted">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <div className="grid md:grid-cols-2 gap-12 md:gap-20">
             <Reveal>
@@ -90,7 +90,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-[#FAFAFA] border-t border-[#E5E7EB]">
+      <section className="bg-surface-dotted">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-28">
           <Reveal>
             <h2 className="section-title max-w-3xl">

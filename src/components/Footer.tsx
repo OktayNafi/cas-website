@@ -14,7 +14,7 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#FAFAFA] border-t border-[#E5E7EB]">
+    <footer className="bg-surface-dotted">
       <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-28">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
           {/* Left: logo + tagline */}
@@ -66,7 +66,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-[#E5E7EB]">
+        <div className="mt-16 pt-8" style={{ borderTop: "1px solid #B87333" }}>
           <p className="text-[12px] text-[#6B7280] leading-relaxed">
             &copy; {new Date().getFullYear()} CompanyAiSolutions Ltd. Company
             Number 17143276. Registered in England and Wales. 46 Medway Drive,

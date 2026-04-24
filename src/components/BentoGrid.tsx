@@ -2,62 +2,79 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import AgentIcon from "./AgentIcon";
+
+type IconType =
+  | "receptionist"
+  | "pm"
+  | "custom-dev"
+  | "lead-gen"
+  | "support"
+  | "automation"
+  | "consulting";
 
 type Agent = {
   href: string;
   tag: string;
   title: string;
   description: string;
+  icon: IconType;
   className: string;
 };
 
 const agents: Agent[] = [
   {
     href: "/recepta",
-    tag: "LIVE",
+    tag: "FLAGSHIP",
     title: "Recepta — AI Phone Receptionist",
     description:
       "Answers your business calls 24/7. Collects caller details, determines urgency, sends you an instant summary. Never miss a customer.",
+    icon: "receptionist",
     className: "md:col-span-2",
   },
   {
     href: "/agents#project-manager",
-    tag: "INCLUDED WITH RETAINERS",
+    tag: "AVAILABLE NOW",
     title: "AI Project Manager",
     description:
       "Strategic planning, task delegation, progress tracking. Your AI PM coordinates everything so you focus on the vision.",
+    icon: "pm",
     className: "md:col-span-1",
   },
   {
     href: "/agents#custom-dev",
-    tag: "ACTIVE PROJECT",
+    tag: "AVAILABLE NOW",
     title: "Custom AI App Development",
     description:
       "Bespoke AI-powered applications built to your specification. Mobile apps, web platforms, dashboards.",
+    icon: "custom-dev",
     className: "md:col-span-2",
   },
   {
     href: "/agents#lead-generation",
-    tag: "COMING SOON",
+    tag: "AVAILABLE NOW",
     title: "AI Lead Generation",
     description:
       "Contacts your leads within 10 seconds. Qualifies, books appointments, follows up automatically.",
+    icon: "lead-gen",
     className: "md:col-span-1",
   },
   {
     href: "/agents#support",
-    tag: "COMING SOON",
+    tag: "AVAILABLE NOW",
     title: "AI Customer Support",
     description:
       "24/7 chatbot on your website and WhatsApp, trained on your knowledge base.",
+    icon: "support",
     className: "md:col-span-1",
   },
   {
     href: "/agents#automation",
-    tag: "COMING SOON",
+    tag: "AVAILABLE NOW",
     title: "Workflow Automation",
     description:
       "Connects your tools, eliminates repetitive admin. Invoice processing, data entry, report generation.",
+    icon: "automation",
     className: "md:col-span-1",
   },
   {
@@ -66,6 +83,7 @@ const agents: Agent[] = [
     title: "AI Consulting & Strategy",
     description:
       "We audit your operations, identify where AI saves money, and build a roadmap.",
+    icon: "consulting",
     className: "md:col-span-1",
   },
 ];
@@ -82,18 +100,17 @@ export default function BentoGrid() {
           transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
           className={a.className}
         >
-          <Link
-            href={a.href}
-            className="group block h-full bg-white border border-[#E5E7EB] p-10 transition-colors duration-300 hover:bg-[#0A0A0A]"
-            style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
-          >
-            <p className="text-[12px] font-medium uppercase tracking-[0.15em] text-[#6B7280] group-hover:text-white transition-colors duration-300">
-              {a.tag}
-            </p>
-            <h3 className="mt-6 text-[24px] font-semibold text-[#0A0A0A] group-hover:text-white tracking-[-0.01em] leading-tight transition-colors duration-300">
+          <Link href={a.href} className="agent-card block group">
+            <div className="flex items-start justify-between gap-4">
+              <p className="agent-tag text-[12px] font-medium uppercase tracking-[0.15em]">
+                {a.tag}
+              </p>
+              <AgentIcon type={a.icon} />
+            </div>
+            <h3 className="agent-title mt-6 text-[24px] font-semibold tracking-[-0.01em] leading-tight">
               {a.title}
             </h3>
-            <p className="mt-4 text-[16px] text-[#1F2937] group-hover:text-white leading-[1.7] transition-colors duration-300">
+            <p className="agent-body mt-4 text-[16px] leading-[1.7]">
               {a.description}
             </p>
           </Link>

@@ -8,6 +8,8 @@
   --color-line-soft: #F0F0F0;
   --color-surface: #FAFAFA;
   --color-paper: #FFFFFF;
+  --color-copper: #B87333;
+  --color-copper-dark: #96602A;
   --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
@@ -19,20 +21,30 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #FFFFFF;
   color: #0A0A0A;
   font-size: 18px;
   line-height: 1.7;
+  /* Fine dot matrix background — barely perceptible */
+  background-color: #FFFFFF;
+  background-image: radial-gradient(circle, #E0E0E0 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+}
+
+/* Darker dots for off-white sections */
+.bg-surface-dotted {
+  background-color: #FAFAFA;
+  background-image: radial-gradient(circle, #D4D4D4 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
 }
 
 /* System cursor everywhere — no custom cursor. */
 
 ::selection {
-  background: #0A0A0A;
+  background: #B87333;
   color: #FFFFFF;
 }
 
-/* Primary button — black bg, white text, sharp corners */
+/* Primary button — copper bg, white text, sharp corners */
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -41,17 +53,19 @@ body {
   font-size: 0.9375rem;
   font-weight: 600;
   letter-spacing: -0.005em;
-  background: #0A0A0A;
+  background: #B87333;
   color: #FFFFFF;
-  border: 1px solid #0A0A0A;
-  transition: background 200ms ease, color 200ms ease;
+  border: 1px solid #B87333;
+  transition: background 200ms ease, border-color 200ms ease;
 }
 
 .btn-primary:hover {
-  background: #FFFFFF;
-  color: #0A0A0A;
+  background: #96602A;
+  border-color: #96602A;
+  color: #FFFFFF;
 }
 
+/* Secondary button — white bg, black border, inverts on hover */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -82,16 +96,22 @@ body {
 
 /* Hero title */
 .hero-title {
-  font-size: clamp(2.75rem, 7vw, 6rem);
+  font-size: clamp(2.5rem, 7vw, 6rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 0.98;
   color: #0A0A0A;
 }
 
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 40px;
+  }
+}
+
 /* Section title */
 .section-title {
-  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-size: clamp(1.875rem, 4.5vw, 3rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.05;
@@ -112,14 +132,15 @@ body {
 }
 
 .input-mono:focus {
-  box-shadow: inset 0 0 0 1px #0A0A0A;
+  box-shadow: inset 0 0 0 1px #B87333;
+  border-color: #B87333;
 }
 
 .input-mono::placeholder {
   color: #9CA3AF;
 }
 
-/* Underline-on-hover link */
+/* Underline-on-hover link — copper */
 .link-underline {
   position: relative;
   color: #0A0A0A;
@@ -133,7 +154,7 @@ body {
   bottom: -4px;
   height: 1px;
   width: 100%;
-  background: #0A0A0A;
+  background: #B87333;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 200ms ease;
@@ -141,4 +162,129 @@ body {
 
 .link-underline:hover::after {
   transform: scaleX(1);
+}
+
+/* ── Section divider (copper, 120px centered) ── */
+.section-rule {
+  display: block;
+  width: 120px;
+  height: 1px;
+  background: #B87333;
+  margin: 80px auto;
+  border: 0;
+}
+
+/* ── Agent card ── */
+.agent-card {
+  position: relative;
+  display: block;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-top: 2px solid #B87333;
+  padding: 2.5rem;
+  height: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition:
+    background 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.agent-card:hover {
+  background: #0A0A0A;
+  color: #FFFFFF;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.agent-card .agent-tag {
+  color: #6B7280;
+  transition: color 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.agent-card .agent-title {
+  color: #0A0A0A;
+  transition: color 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.agent-card .agent-body {
+  color: #1F2937;
+  transition: color 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.agent-card:hover .agent-tag,
+.agent-card:hover .agent-title,
+.agent-card:hover .agent-body {
+  color: #FFFFFF;
+}
+.agent-card:hover .agent-icon [data-stroke] {
+  stroke: #FFFFFF;
+}
+.agent-card:hover .agent-icon [data-fill-black] {
+  fill: #FFFFFF;
+}
+
+/* ── Animated agent icon keyframes ── */
+@keyframes pulse-bar-1 {
+  0%, 100% { transform: scaleY(0.45); }
+  50% { transform: scaleY(1); }
+}
+@keyframes pulse-bar-2 {
+  0%, 100% { transform: scaleY(0.9); }
+  50% { transform: scaleY(0.35); }
+}
+@keyframes pulse-bar-3 {
+  0%, 100% { transform: scaleY(0.6); }
+  50% { transform: scaleY(0.95); }
+}
+
+@keyframes kanban-slide-1 {
+  0%, 20% { transform: translateY(0); }
+  40%, 100% { transform: translateY(10px); }
+}
+@keyframes kanban-slide-2 {
+  0%, 40% { transform: translateY(0); }
+  60%, 100% { transform: translateY(10px); }
+}
+
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes bar-grow-1 {
+  0%, 10% { transform: scaleY(0); }
+  30%, 100% { transform: scaleY(1); }
+}
+@keyframes bar-grow-2 {
+  0%, 30% { transform: scaleY(0); }
+  50%, 100% { transform: scaleY(1); }
+}
+@keyframes bar-grow-3 {
+  0%, 50% { transform: scaleY(0); }
+  70%, 100% { transform: scaleY(1); }
+}
+
+@keyframes dot-typing-1 {
+  0%, 20% { opacity: 0.3; }
+  40% { opacity: 1; }
+  60%, 100% { opacity: 0.3; }
+}
+@keyframes dot-typing-2 {
+  0%, 33% { opacity: 0.3; }
+  53% { opacity: 1; }
+  73%, 100% { opacity: 0.3; }
+}
+@keyframes dot-typing-3 {
+  0%, 46% { opacity: 0.3; }
+  66% { opacity: 1; }
+  86%, 100% { opacity: 0.3; }
+}
+
+@keyframes node-travel {
+  0%   { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+@keyframes filament-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
 }

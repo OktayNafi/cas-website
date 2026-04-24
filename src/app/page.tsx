@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       {/* HERO */}
-      <section className="bg-white">
+      <section>
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 min-h-[calc(100vh-4rem)] flex flex-col justify-center py-32 md:py-40">
           <Reveal y={20}>
             <p className="eyebrow">AI Implementation Company</p>
@@ -48,16 +48,20 @@ export default function Home() {
         </div>
       </section>
 
+      <hr className="section-rule" />
+
       {/* STATS */}
-      <section className="bg-[#FAFAFA] border-y border-[#E5E7EB]">
+      <section className="bg-surface-dotted">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-28">
           <StatsBar />
         </div>
       </section>
 
+      <hr className="section-rule" />
+
       {/* BENTO */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-40">
+      <section>
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <Reveal>
             <p className="eyebrow">What We Build</p>
             <h2 className="section-title mt-4 max-w-3xl">
@@ -70,9 +74,11 @@ export default function Home() {
         </div>
       </section>
 
+      <hr className="section-rule" />
+
       {/* PROCESS */}
-      <section className="bg-[#FAFAFA] border-y border-[#E5E7EB]">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-40">
+      <section className="bg-surface-dotted">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <Reveal>
             <p className="eyebrow">Our Process</p>
             <h2 className="section-title mt-4 max-w-3xl">
@@ -85,9 +91,11 @@ export default function Home() {
         </div>
       </section>
 
+      <hr className="section-rule" />
+
       {/* CASE STUDY */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-40">
+      <section>
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <Reveal>
             <p className="eyebrow">Client Work</p>
             <h2 className="section-title mt-4">Mediwell Healthcare</h2>
@@ -120,9 +128,11 @@ export default function Home() {
         </div>
       </section>
 
+      <hr className="section-rule" />
+
       {/* QUOTE FORM */}
-      <section id="quote" className="bg-[#FAFAFA] border-t border-[#E5E7EB]">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-40">
+      <section id="quote" className="bg-surface-dotted">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <Reveal>
             <p className="eyebrow">Get Started</p>
             <h2 className="section-title mt-4">Request a custom quote.</h2>

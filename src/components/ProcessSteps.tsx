@@ -31,8 +31,8 @@ export default function ProcessSteps() {
       {/* Animated horizontal rule connecting the steps (desktop only) */}
       <motion.div
         aria-hidden="true"
-        className="hidden md:block absolute left-0 right-0 bg-[#0A0A0A] h-px origin-left"
-        style={{ top: 36 }}
+        className="hidden md:block absolute left-0 right-0 h-px origin-left"
+        style={{ top: 36, background: "#B87333" }}
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true, amount: 0.3 }}

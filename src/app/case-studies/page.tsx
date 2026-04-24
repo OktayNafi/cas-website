@@ -43,7 +43,7 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      <section className="bg-[#FAFAFA] border-t border-[#E5E7EB]">
+      <section className="bg-surface-dotted">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <Reveal>
             <article

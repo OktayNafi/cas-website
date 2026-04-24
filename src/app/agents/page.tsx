@@ -23,7 +23,7 @@ type Agent = {
 const agents: Agent[] = [
   {
     id: "recepta",
-    tag: "LIVE",
+    tag: "FLAGSHIP",
     title: "Recepta — AI Phone Receptionist",
     price: "From £100/mo",
     setup: "£999 one-time setup",
@@ -46,7 +46,7 @@ const agents: Agent[] = [
   },
   {
     id: "project-manager",
-    tag: "INCLUDED WITH RETAINERS",
+    tag: "AVAILABLE NOW",
     title: "AI Project Manager",
     price: "Included with retainers",
     summary:
@@ -65,7 +65,7 @@ const agents: Agent[] = [
   },
   {
     id: "custom-dev",
-    tag: "ACTIVE PROJECT",
+    tag: "AVAILABLE NOW",
     title: "Custom AI Application Development",
     price: "From £5,000",
     summary:
@@ -84,7 +84,7 @@ const agents: Agent[] = [
   },
   {
     id: "lead-generation",
-    tag: "COMING SOON",
+    tag: "AVAILABLE NOW",
     title: "AI Lead Generation",
     price: "From £200/mo",
     summary:
@@ -105,7 +105,7 @@ const agents: Agent[] = [
   },
   {
     id: "support",
-    tag: "COMING SOON",
+    tag: "AVAILABLE NOW",
     title: "AI Customer Support",
     price: "From £100/mo",
     summary:
@@ -125,7 +125,7 @@ const agents: Agent[] = [
   },
   {
     id: "automation",
-    tag: "COMING SOON",
+    tag: "AVAILABLE NOW",
     title: "Workflow Automation",
     price: "From £200/mo + project fee",
     summary:
@@ -183,7 +183,7 @@ export default function AgentsPage() {
         </div>
       </section>
 
-      <section className="bg-[#FAFAFA] border-t border-[#E5E7EB]">
+      <section className="bg-surface-dotted">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <div className="space-y-16">
             {agents.map((agent) => (
