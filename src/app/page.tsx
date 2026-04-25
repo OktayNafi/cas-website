@@ -8,8 +8,8 @@ import QuoteForm from "@/components/QuoteForm";
 export default function Home() {
   return (
     <>
-      {/* HERO */}
-      <section>
+      {/* HERO — white + copper radial glow top-right */}
+      <section className="bg-paper copper-glow-hero">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 min-h-[calc(100vh-4rem)] flex flex-col justify-center py-32 md:py-40">
           <Reveal y={20}>
             <p className="eyebrow">AI Implementation Company</p>
@@ -50,8 +50,8 @@ export default function Home() {
 
       <hr className="section-rule" />
 
-      {/* STATS */}
-      <section className="bg-surface-dotted">
+      {/* STATS — warm */}
+      <section className="bg-warm">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-28">
           <StatsBar />
         </div>
@@ -59,8 +59,8 @@ export default function Home() {
 
       <hr className="section-rule" />
 
-      {/* BENTO */}
-      <section>
+      {/* BENTO — white + copper radial glow bottom-left */}
+      <section className="bg-paper copper-glow-agents">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <Reveal>
             <p className="eyebrow">What We Build</p>
@@ -76,8 +76,8 @@ export default function Home() {
 
       <hr className="section-rule" />
 
-      {/* PROCESS */}
-      <section className="bg-surface-dotted">
+      {/* PROCESS — warm */}
+      <section className="bg-warm">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <Reveal>
             <p className="eyebrow">Our Process</p>
@@ -93,8 +93,8 @@ export default function Home() {
 
       <hr className="section-rule" />
 
-      {/* CASE STUDY */}
-      <section>
+      {/* CASE STUDY — warm */}
+      <section className="bg-warm">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <Reveal>
             <p className="eyebrow">Client Work</p>
@@ -130,8 +130,8 @@ export default function Home() {
 
       <hr className="section-rule" />
 
-      {/* QUOTE FORM */}
-      <section id="quote" className="bg-surface-dotted">
+      {/* QUOTE FORM — white */}
+      <section id="quote" className="bg-paper">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <Reveal>
             <p className="eyebrow">Get Started</p>
@@ -166,9 +166,7 @@ export default function Home() {
               postalCode: "NN5 7NY",
               addressCountry: "GB",
             },
-            sameAs: [
-              "https://www.linkedin.com/company/companyaisolutions",
-            ],
+            sameAs: ["https://www.linkedin.com/company/companyaisolutions"],
           }),
         }}
       />

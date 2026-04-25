@@ -48,7 +48,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${GeistSans.className} antialiased`}>
+      <body className={`${GeistSans.className} antialiased noise-overlay`}>
         <Navbar />
         <main className="min-h-screen pt-16">{children}</main>
         <Footer />
