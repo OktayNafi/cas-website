@@ -1,52 +1,80 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
+interface CountUpProps {
+  end: number;
+  suffix?: string;
+  prefix?: string;
+  duration?: number;
+}
+
 export function CountUp({
   end,
   suffix = '',
   prefix = '',
   duration = 2000,
-}: {
-  end: number;
-  suffix?: string;
-  prefix?: string;
-  duration?: number;
-}) {
+}: CountUpProps) {
   const [count, setCount] = useState(0);
-  const [started, setStarted] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started) setStarted(true);
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(el);
-    const fallback = setTimeout(() => setStarted(true), 3000);
-    return () => {
-      observer.disconnect();
-      clearTimeout(fallback);
-    };
-  }, [started]);
+    const element = ref.current;
+    if (!element) {
+      // Fallback if ref doesn't attach
+      const timer = setTimeout(() => setHasStarted(true), 2000);
+      return () => clearTimeout(timer);
+    }
+
+    // Try IntersectionObserver
+    if (typeof IntersectionObserver !== 'undefined') {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0]?.isIntersecting) {
+            setHasStarted(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(element);
+
+      // Fallback timeout
+      const timer = setTimeout(() => {
+        setHasStarted(true);
+        observer.disconnect();
+      }, 3000);
+
+      return () => {
+        observer.disconnect();
+        clearTimeout(timer);
+      };
+    } else {
+      // No IntersectionObserver support — just start
+      setHasStarted(true);
+    }
+  }, []);
 
   useEffect(() => {
-    if (!started) return;
-    let startTime: number;
-    let animationFrame: number;
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
+    if (!hasStarted) return;
+
+    let start: number | null = null;
+    let frame: number;
+
+    const step = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * end));
-      if (progress < 1) animationFrame = requestAnimationFrame(animate);
+      setCount(Math.round(eased * end));
+
+      if (progress < 1) {
+        frame = requestAnimationFrame(step);
+      }
     };
-    animationFrame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [started, end, duration]);
+
+    frame = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frame);
+  }, [hasStarted, end, duration]);
 
   return (
     <span ref={ref}>

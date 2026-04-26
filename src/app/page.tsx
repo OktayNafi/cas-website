@@ -4,12 +4,48 @@ import BentoGrid from "@/components/BentoGrid";
 import ProcessSteps from "@/components/ProcessSteps";
 import StatsBar from "@/components/StatsBar";
 import QuoteForm from "@/components/QuoteForm";
+import TechMarquee from "@/components/TechMarquee";
+
+const trustIndicators = [
+  { icon: "🇬🇧", label: "UK Built & Hosted" },
+  { icon: "🔒", label: "GDPR Compliant" },
+  { icon: "⚡", label: "<8 Week Delivery" },
+  { icon: "🏢", label: "Companies House Registered" },
+];
+
+const caseStats = [
+  { value: "11", label: "Medical Specialties" },
+  { value: "30–40", label: "Daily Patients" },
+  { value: "20 min", label: "Appointment Slots" },
+  { value: "iOS", label: "Platform" },
+];
+
+const nextSteps = [
+  "You submit your details",
+  "We review within 24 hours",
+  "We schedule a free 30-minute discovery call",
+  "You receive a custom proposal with pricing",
+];
+
+function CopperDivider() {
+  return (
+    <div
+      aria-hidden="true"
+      style={{
+        width: 80,
+        height: 1,
+        backgroundColor: "#B87333",
+        margin: "0 auto",
+      }}
+    />
+  );
+}
 
 export default function Home() {
   return (
     <>
-      {/* HERO — white + copper radial glow top-right */}
-      <section className="bg-paper copper-glow-hero">
+      {/* HERO */}
+      <section className="copper-glow-hero">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 min-h-[calc(100vh-4rem)] flex flex-col justify-center py-32 md:py-40">
           <Reveal y={20}>
             <p className="eyebrow">AI Implementation Company</p>
@@ -45,22 +81,49 @@ export default function Home() {
               </Link>
             </div>
           </Reveal>
+
+          {/* Trust indicators row */}
+          <Reveal delay={0.85}>
+            <div
+              className="mt-12 grid grid-cols-2 sm:flex sm:flex-row sm:flex-wrap gap-x-8 gap-y-3"
+              style={{
+                fontSize: 13,
+                letterSpacing: "0.05em",
+                textTransform: "uppercase",
+                color: "#6B7280",
+                opacity: 0.6,
+              }}
+            >
+              {trustIndicators.map((t) => (
+                <span
+                  key={t.label}
+                  className="inline-flex items-center gap-2 whitespace-nowrap"
+                >
+                  <span aria-hidden="true">{t.icon}</span>
+                  <span>{t.label}</span>
+                </span>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      <hr className="section-rule" />
+      {/* TECH STACK MARQUEE */}
+      <TechMarquee />
 
-      {/* STATS — warm */}
-      <section className="bg-warm">
+      <CopperDivider />
+
+      {/* STATS */}
+      <section>
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-28">
           <StatsBar />
         </div>
       </section>
 
-      <hr className="section-rule" />
+      <CopperDivider />
 
-      {/* BENTO — white + copper radial glow bottom-left */}
-      <section className="bg-paper copper-glow-agents">
+      {/* BENTO */}
+      <section className="copper-glow-agents">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <Reveal>
             <p className="eyebrow">What We Build</p>
@@ -74,10 +137,10 @@ export default function Home() {
         </div>
       </section>
 
-      <hr className="section-rule" />
+      <CopperDivider />
 
-      {/* PROCESS — warm */}
-      <section className="bg-warm">
+      {/* PROCESS */}
+      <section>
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <Reveal>
             <p className="eyebrow">Our Process</p>
@@ -91,10 +154,10 @@ export default function Home() {
         </div>
       </section>
 
-      <hr className="section-rule" />
+      <CopperDivider />
 
-      {/* CASE STUDY — warm */}
-      <section className="bg-warm">
+      {/* CASE STUDY */}
+      <section>
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <Reveal>
             <p className="eyebrow">Client Work</p>
@@ -109,18 +172,62 @@ export default function Home() {
                 self-booking, video consultations, medical history intake, and
                 in-app payments — powered by Company AI Solutions.
               </p>
-              <p className="mt-6 text-[14px] italic text-[#6B7280]">
+
+              {/* Mini stats row */}
+              <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6">
+                {caseStats.map((s) => (
+                  <div key={s.label}>
+                    <div
+                      className="text-[36px] font-bold leading-none text-[#0A0A0A]"
+                      style={{ letterSpacing: "-0.02em" }}
+                    >
+                      {s.value}
+                    </div>
+                    <p className="mt-3 text-[12px] uppercase tracking-[0.1em] text-[#6B7280]">
+                      {s.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <p className="mt-10 text-[14px] italic text-[#6B7280]">
                 Case study available on request.
               </p>
             </Reveal>
 
             <Reveal delay={0.1}>
               <div
-                className="aspect-[4/5] bg-[#F0F0F0] border border-[#E5E7EB] flex items-center justify-center"
-                aria-label="App preview placeholder"
+                className="aspect-[4/5] flex flex-col items-center justify-center text-center px-8"
+                style={{
+                  background: "#1A1A1A",
+                  border: "1px solid #1A1A1A",
+                }}
+                aria-label="Mediwell iOS app teaser"
               >
-                <span className="text-[14px] text-[#6B7280]">
-                  App Preview Coming Soon
+                <span
+                  className="text-[48px] font-extrabold uppercase tracking-[0.05em]"
+                  style={{
+                    color: "transparent",
+                    WebkitTextStroke: "1px #FFFFFF",
+                    letterSpacing: "0.08em",
+                  }}
+                >
+                  MEDIWELL
+                </span>
+                <span
+                  className="mt-6 text-[14px]"
+                  style={{
+                    color: "#999999",
+                    letterSpacing: "0.05em",
+                  }}
+                >
+                  iOS Patient App — Launching 2026
+                </span>
+                <span
+                  className="mt-2 text-[11px] uppercase tracking-[0.2em]"
+                  style={{ color: "#B87333" }}
+                >
+                  In Development
                 </span>
               </div>
             </Reveal>
@@ -128,10 +235,10 @@ export default function Home() {
         </div>
       </section>
 
-      <hr className="section-rule" />
+      <CopperDivider />
 
-      {/* QUOTE FORM — white */}
-      <section id="quote" className="bg-paper">
+      {/* QUOTE FORM */}
+      <section id="quote">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-0 py-20 md:py-32">
           <Reveal>
             <p className="eyebrow">Get Started</p>
@@ -141,8 +248,42 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <div className="mt-16 max-w-2xl">
-            <QuoteForm />
+          <div className="mt-16 grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+            <div className="lg:col-span-3">
+              <QuoteForm />
+            </div>
+            <Reveal delay={0.1}>
+              <aside className="lg:col-span-2">
+                <p className="eyebrow">What happens next?</p>
+                <ol className="mt-6 space-y-4">
+                  {nextSteps.map((step, i) => (
+                    <li
+                      key={step}
+                      className="flex items-start gap-4 text-[16px] leading-[1.6]"
+                      style={{ color: "#6B7280" }}
+                    >
+                      <span
+                        style={{
+                          color: "#B87333",
+                          fontWeight: 700,
+                          minWidth: 18,
+                        }}
+                      >
+                        {i + 1}.
+                      </span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ol>
+                <p
+                  className="mt-8 text-[14px] italic"
+                  style={{ color: "#6B7280" }}
+                >
+                  No commitment. No pressure. Just a conversation about how AI
+                  can help your business.
+                </p>
+              </aside>
+            </Reveal>
           </div>
         </div>
       </section>

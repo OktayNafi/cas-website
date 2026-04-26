@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
+import BackgroundGradients from "@/components/BackgroundGradients";
+import NoiseOverlay from "@/components/NoiseOverlay";
 
 export const metadata: Metadata = {
   title: {
@@ -48,11 +50,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${GeistSans.className} antialiased noise-overlay`}>
+      <body className={`${GeistSans.className} antialiased`}>
+        {/* Layer 3 — fixed warm/cool gradient blobs behind everything */}
+        <BackgroundGradients />
+
         <Navbar />
         <main className="min-h-screen pt-16">{children}</main>
         <Footer />
         <CookieBanner />
+
+        {/* Layer 2 — paper-grain overlay above all content */}
+        <NoiseOverlay />
       </body>
     </html>
   );
